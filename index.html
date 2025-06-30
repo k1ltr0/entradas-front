@@ -590,15 +590,13 @@
                     <div class="prices-section" style="margin: 40px 0;">
                         <h3 style="color: #2d3748; text-align: center; margin-bottom: 24px;">Valores de Inscripción</h3>
                         <div class="prices-grid">
-                            <div class="price-card agotada">
+                            <div class="price-card">
                                 <div class="price-title">Preventa Prueba Individual</div>
                                 <div class="price-value">$25.000.-</div>
-                                <div class="agotada-label">Agotada</div>
                             </div>
-                            <div class="price-card agotada">
+                            <div class="price-card">
                                 <div class="price-title">Preventa Prueba Relevo</div>
                                 <div class="price-value">$60.000.-</div>
-                                <div class="agotada-label">Agotada</div>
                             </div>
                             <div class="price-card">
                                 <div class="price-title">Venta General Prueba Individual</div>
@@ -684,8 +682,9 @@
                         <div class="form-group">
                             <label for="stage">Etapa</label>
                             <select id="stage" required>
-                                <option value="preventa" disabled>Preventa (Agotada)</option>
-                                <option value="general">Venta General</option>
+                                <option value="">Selecciona una etapa</option>
+                                <option value="preventa">Preventa</option>
+                                <option value="general" disabled>Venta General</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -809,13 +808,7 @@
             }
         }
 
-        document.getElementById('stage').addEventListener('change', function() {
-            if (this.value === 'preventa') {
-                document.getElementById('buyButton').textContent = '🎯 Comprar Entrada';
-            } else {
-                updateBuyButtonPrice();
-            }
-        });
+        document.getElementById('stage').addEventListener('change', updateBuyButtonPrice);
         document.getElementById('testType').addEventListener('change', updateBuyButtonPrice);
         document.addEventListener('DOMContentLoaded', updateBuyButtonPrice);
 
