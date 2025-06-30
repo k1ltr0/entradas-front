@@ -748,10 +748,12 @@
 
         document.getElementById('gender').addEventListener('change', updateCategoryAndDistances);
         document.getElementById('age').addEventListener('input', updateCategoryAndDistances);
+        document.getElementById('testType').addEventListener('change', updateCategoryAndDistances);
 
         function updateCategoryAndDistances() {
             const gender = document.getElementById('gender').value;
             const age = parseInt(document.getElementById('age').value, 10);
+            const testType = document.getElementById('testType').value;
             const categoryInput = document.getElementById('category');
             const distanceSelect = document.getElementById('distance');
             distanceSelect.innerHTML = '<option value="">Selecciona una distancia</option>';
@@ -762,7 +764,12 @@
             const category = getCategory(gender, age);
             if (category) {
                 categoryInput.value = category.name;
-                category.distances.forEach(dist => {
+                // Filter distances based on test type
+                let availableDistances = category.distances;
+                if (testType === 'relevo') {
+                    availableDistances = availableDistances.filter(dist => dist === '1000');
+                }
+                availableDistances.forEach(dist => {
                     const label = dist + ' metros';
                     const opt = document.createElement('option');
                     opt.value = dist;
