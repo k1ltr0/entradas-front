@@ -480,13 +480,13 @@
         window.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('authToken');
             const tokenExpiry = localStorage.getItem('tokenExpiry');
-            
+
             if (!token || !tokenExpiry || Date.now() >= parseInt(tokenExpiry)) {
                 // Token is missing or expired, redirect to login
                 window.location.href = 'login.html';
                 return;
             }
-            
+
             // Load tickets data
             loadTickets();
         });
@@ -495,7 +495,7 @@
             const token = localStorage.getItem('authToken');
             const tokenType = localStorage.getItem('tokenType') || 'bearer';
             const ticketsContent = document.getElementById('ticketsContent');
-            
+
             // Show loading state
             ticketsContent.innerHTML = `
                 <div class="loading">
@@ -503,7 +503,7 @@
                     <p>Cargando tickets...</p>
                 </div>
             `;
-            
+
             try {
                 const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
                     method: 'GET',
@@ -512,11 +512,11 @@
                         'Content-Type': 'application/json'
                     }
                 });
-                
+
                 if (response.ok) {
                     const tickets = await response.json();
                     console.log('API Response:', tickets); // Debug log
-                    
+
                     // Handle different response formats
                     if (Array.isArray(tickets)) {
                         allTickets = tickets;
@@ -528,10 +528,10 @@
                         console.log('Unexpected response format:', tickets);
                         allTickets = [];
                     }
-                    
+
                     filteredTickets = [...allTickets];
                     console.log('Processed tickets:', allTickets); // Debug log
-                    
+
                     updateStats();
                     updateCategoryFilter();
                     renderTicketsTable();
@@ -564,7 +564,7 @@
             const totalRevenue = allTickets
                 .filter(t => t.payment_status === 'approved' || t.status === 'paid')
                 .reduce((sum, t) => sum + (t.price || 0), 0);
-            
+
             document.getElementById('totalTickets').textContent = totalTickets;
             document.getElementById('paidTickets').textContent = paidTickets;
             document.getElementById('pendingTickets').textContent = pendingTickets;
@@ -574,10 +574,10 @@
         function updateCategoryFilter() {
             const categoryFilter = document.getElementById('categoryFilter');
             const categories = [...new Set(allTickets.map(t => t.category).filter(Boolean))];
-            
+
             // Clear existing options except the first one
             categoryFilter.innerHTML = '<option value="">Todas las categorías</option>';
-            
+
             categories.forEach(category => {
                 const option = document.createElement('option');
                 option.value = category;
@@ -588,12 +588,12 @@
 
         function renderTicketsTable() {
             const ticketsContent = document.getElementById('ticketsContent');
-            
+
             if (filteredTickets.length === 0) {
-                const message = allTickets.length === 0 ? 
-                    'No hay tickets registrados en el sistema.' : 
+                const message = allTickets.length === 0 ?
+                    'No hay tickets registrados en el sistema.' :
                     'No se encontraron tickets con los filtros aplicados.';
-                    
+
                 ticketsContent.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">🎫</div>
@@ -606,7 +606,7 @@
                 `;
                 return;
             }
-            
+
             const tableHTML = `
                 <table class="tickets-table">
                     <thead>
@@ -639,7 +639,7 @@
                     </tbody>
                 </table>
             `;
-            
+
             ticketsContent.innerHTML = tableHTML;
         }
 
@@ -647,15 +647,15 @@
             const statusFilter = document.getElementById('statusFilter').value;
             const categoryFilter = document.getElementById('categoryFilter').value;
             const distanceFilter = document.getElementById('distanceFilter').value;
-            
+
             filteredTickets = allTickets.filter(ticket => {
                 const statusMatch = !statusFilter || ticket.status === statusFilter || ticket.payment_status === statusFilter;
                 const categoryMatch = !categoryFilter || ticket.category === categoryFilter;
                 const distanceMatch = !distanceFilter || ticket.distance === distanceFilter;
-                
+
                 return statusMatch && categoryMatch && distanceMatch;
             });
-            
+
             renderTicketsTable();
         }
 
@@ -697,7 +697,7 @@
 
         function formatDate(dateString) {
             if (!dateString) return 'N/A';
-            
+
             try {
                 const date = new Date(dateString);
                 return date.toLocaleDateString('es-CL', {
@@ -717,7 +717,7 @@
             localStorage.removeItem('authToken');
             localStorage.removeItem('tokenType');
             localStorage.removeItem('tokenExpiry');
-            
+
             // Redirect to login page
             window.location.href = 'login.html';
         }
@@ -726,12 +726,12 @@
         async function debugAPI() {
             const token = localStorage.getItem('authToken');
             const tokenType = localStorage.getItem('tokenType') || 'bearer';
-            
+
             console.log('=== API DEBUG INFO ===');
             console.log('Token:', token ? 'Present' : 'Missing');
             console.log('Token Type:', tokenType);
             console.log('API URL:', 'https://entradas-back-66181581846.europe-west1.run.app/api/tickets');
-            
+
             try {
                 const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
                     method: 'GET',
@@ -740,20 +740,20 @@
                         'Content-Type': 'application/json'
                     }
                 });
-                
+
                 console.log('Response Status:', response.status);
                 console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
-                
+
                 const responseText = await response.text();
                 console.log('Raw Response:', responseText);
-                
+
                 try {
                     const responseJson = JSON.parse(responseText);
                     console.log('Parsed JSON:', responseJson);
                 } catch (e) {
                     console.log('Response is not valid JSON');
                 }
-                
+
                 alert('Check browser console for debug information');
             } catch (error) {
                 console.error('Fetch Error:', error);
