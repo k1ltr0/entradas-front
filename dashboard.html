@@ -252,6 +252,12 @@
             background: #f7fafc;
         }
 
+        .ticket-row:hover {
+            background: #f0f4f8 !important;
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+
         .status-badge {
             padding: 4px 12px;
             border-radius: 20px;
@@ -378,6 +384,191 @@
                 padding: 2px 8px;
             }
         }
+
+        /* Modal Styles for Ticket Detail */
+        .ticket-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .ticket-modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .ticket-modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 30px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .ticket-modal-close {
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        .ticket-modal-close:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .ticket-modal-body {
+            padding: 30px;
+        }
+
+        .ticket-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .ticket-detail-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .ticket-detail-section h3 {
+            color: #2d3748;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ticket-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .ticket-detail-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .ticket-detail-label {
+            font-weight: 500;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .ticket-detail-value {
+            font-weight: 600;
+            color: #2d3748;
+            text-align: right;
+        }
+
+        .ticket-detail-value.highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.1rem;
+        }
+
+        .ticket-modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #e2e8f0;
+            background: #f7fafc;
+            border-radius: 0 0 16px 16px;
+            text-align: right;
+        }
+
+        .btn-close-modal {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ticket-modal-content {
+                margin: 2% auto;
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .ticket-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .ticket-modal-header {
+                padding: 20px;
+            }
+
+            .ticket-modal-body {
+                padding: 20px;
+            }
+
+            .ticket-modal-footer {
+                padding: 15px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -471,6 +662,22 @@
             </div>
         </div>
     </main>
+
+    <!-- Modal para mostrar detalle del ticket -->
+    <div id="ticketDetailModal" class="ticket-modal">
+        <div class="ticket-modal-content">
+            <div class="ticket-modal-header">
+                <h2>📋 Detalle del Ticket</h2>
+                <span class="ticket-modal-close" onclick="closeTicketDetail()">&times;</span>
+            </div>
+            <div class="ticket-modal-body" id="ticketDetailContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="ticket-modal-footer">
+                <button class="btn-close-modal" onclick="closeTicketDetail()">Cerrar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let allTickets = [];
@@ -624,7 +831,7 @@
                     </thead>
                     <tbody>
                         ${filteredTickets.map(ticket => `
-                            <tr>
+                            <tr data-ticket-id="${ticket.id || 0}" class="ticket-row" style="cursor: pointer;">
                                 <td><strong>${ticket.id || 'N/A'}</strong></td>
                                 <td>${ticket.name || 'N/A'}</td>
                                 <td>${ticket.email || 'N/A'}</td>
@@ -641,6 +848,23 @@
             `;
 
             ticketsContent.innerHTML = tableHTML;
+
+            // Add click event listeners to ticket rows
+            addTicketRowEventListeners();
+        }
+
+        function addTicketRowEventListeners() {
+            const ticketRows = document.querySelectorAll('.ticket-row');
+            console.log('Adding event listeners to', ticketRows.length, 'rows');
+
+            ticketRows.forEach((row, index) => {
+                row.addEventListener('click', function() {
+                    console.log('Row clicked:', index);
+                    const ticketId = this.getAttribute('data-ticket-id');
+                    console.log('Ticket ID from data attribute:', ticketId);
+                    showTicketDetail(ticketId);
+                });
+            });
         }
 
         function applyFilters() {
@@ -760,6 +984,159 @@
                 alert('Error: ' + error.message);
             }
         }
+
+        // Functions for ticket detail modal
+        function showTicketDetail(ticketId) {
+            console.log('showTicketDetail called with ID:', ticketId);
+            console.log('allTickets:', allTickets);
+
+            const ticket = allTickets.find(t => t.id == ticketId);
+            console.log('Found ticket:', ticket);
+
+            if (!ticket) {
+                alert('Ticket no encontrado. ID buscado: ' + ticketId);
+                return;
+            }
+
+            const modal = document.getElementById('ticketDetailModal');
+            const content = document.getElementById('ticketDetailContent');
+
+            // Format ticket data for display
+            const ticketHTML = `
+                <div class="ticket-detail-grid">
+                    <div class="ticket-detail-section">
+                        <h3>👤 Información Personal</h3>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">ID del Ticket:</span>
+                            <span class="ticket-detail-value highlight">#${ticket.id || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Nombre Completo:</span>
+                            <span class="ticket-detail-value">${ticket.name || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Email:</span>
+                            <span class="ticket-detail-value">${ticket.email || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Teléfono:</span>
+                            <span class="ticket-detail-value">${ticket.phone || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Género:</span>
+                            <span class="ticket-detail-value">${ticket.gender || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Edad:</span>
+                            <span class="ticket-detail-value">${ticket.age || 'N/A'}</span>
+                        </div>
+                    </div>
+
+                    <div class="ticket-detail-section">
+                        <h3>🏊 Información de Competencia</h3>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Categoría:</span>
+                            <span class="ticket-detail-value">${ticket.category || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Club:</span>
+                            <span class="ticket-detail-value">${ticket.club || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Distancia:</span>
+                            <span class="ticket-detail-value">${ticket.distance ? ticket.distance + ' metros' : 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Tipo de Prueba:</span>
+                            <span class="ticket-detail-value">${ticket.test_type || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Etapa:</span>
+                            <span class="ticket-detail-value">${ticket.stage || 'N/A'}</span>
+                        </div>
+                    </div>
+
+                    <div class="ticket-detail-section">
+                        <h3>💰 Información de Pago</h3>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Precio:</span>
+                            <span class="ticket-detail-value highlight">$${(ticket.price || 0).toLocaleString('es-CL')}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Estado del Pago:</span>
+                            <span class="ticket-detail-value">
+                                <span class="status-badge status-${getStatusClass(ticket.payment_status)}">${getStatusText(ticket.payment_status)}</span>
+                            </span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Estado del Ticket:</span>
+                            <span class="ticket-detail-value">
+                                <span class="status-badge status-${getStatusClass(ticket.status)}">${getStatusText(ticket.status)}</span>
+                            </span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">ID de Pago:</span>
+                            <span class="ticket-detail-value">${ticket.payment_id || 'N/A'}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Referencia MP:</span>
+                            <span class="ticket-detail-value">${ticket.mercado_pago_id || 'N/A'}</span>
+                        </div>
+                    </div>
+
+                    <div class="ticket-detail-section">
+                        <h3>📅 Información de Fechas</h3>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Fecha de Compra:</span>
+                            <span class="ticket-detail-value">${formatDate(ticket.purchase_date)}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Última Actualización:</span>
+                            <span class="ticket-detail-value">${formatDate(ticket.updated_at)}</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="ticket-detail-label">Fecha de Creación:</span>
+                            <span class="ticket-detail-value">${formatDate(ticket.created_at)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                ${ticket.notes ? `
+                    <div class="ticket-detail-section" style="grid-column: 1 / -1;">
+                        <h3>📝 Notas Adicionales</h3>
+                        <p style="background: white; padding: 15px; border-radius: 8px; margin: 0; line-height: 1.5;">${ticket.notes}</p>
+                    </div>
+                ` : ''}
+            `;
+
+            content.innerHTML = ticketHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeTicketDetail() {
+            const modal = document.getElementById('ticketDetailModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('ticketDetailModal');
+            if (event.target === modal) {
+                closeTicketDetail();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('ticketDetailModal');
+                if (modal.style.display === 'block') {
+                    closeTicketDetail();
+                }
+            }
+        });
 
         // Auto-refresh every 30 seconds
         setInterval(loadTickets, 30000);
