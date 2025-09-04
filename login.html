@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Aguas Abiertas Chile 2025</title>
+    <title>Login - Event Ticketing Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -12,11 +12,28 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --shopify-bg: #F6F6F7;
+            --shopify-sidebar: #1A1C23;
+            --shopify-text: #202223;
+            --shopify-text-secondary: #6D7175;
+            --shopify-green: #008060;
+            --shopify-blue: #006FBB;
+            --shopify-border: #E1E3E5;
+            --shopify-white: #FFFFFF;
+            --shopify-hover: #F7F8FA;
+            --shopify-success: #008060;
+            --shopify-warning: #F1A817;
+            --shopify-error: #D72C0D;
+            --shopify-info: #006FBB;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--shopify-bg);
+            color: var(--shopify-text);
+            line-height: 1.4;
+            font-size: 14px;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -25,185 +42,257 @@
         }
 
         .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 50px 40px;
+            background: var(--shopify-white);
+            border-radius: 12px;
+            border: 1px solid var(--shopify-border);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            padding: 48px 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             position: relative;
-            overflow: hidden;
         }
 
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .logo {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo img {
-            max-width: 80px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            width: 48px;
+            height: 48px;
+            background: var(--shopify-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0 auto 24px;
         }
 
         .login-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--shopify-text);
+            margin-bottom: 8px;
         }
 
         .login-subtitle {
-            text-align: center;
-            color: #718096;
-            margin-bottom: 40px;
-            font-size: 1rem;
+            color: var(--shopify-text-secondary);
+            font-size: 14px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--shopify-text);
+            font-size: 13px;
         }
 
-        input {
+        .form-input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            background: #f7fafc;
-            color: #2d3748;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            padding: 12px 16px;
+            border: 1px solid var(--shopify-border);
+            border-radius: 6px;
+            background: var(--shopify-white);
+            color: var(--shopify-text);
+            font-size: 14px;
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
 
-        input::placeholder {
-            color: #a0aec0;
+        .form-input::placeholder {
+            color: var(--shopify-text-secondary);
         }
 
-        input:focus {
+        .form-input:focus {
             outline: none;
-            border-color: #667eea;
-            background: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: var(--shopify-green);
+            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
         }
 
-        .btn-login {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .form-input:hover {
+            border-color: var(--shopify-text-secondary);
+        }
+
+        .btn-primary {
+            background: var(--shopify-green);
             color: white;
-            padding: 18px 40px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s ease;
             width: 100%;
-            margin-top: 20px;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+        .btn-primary:hover {
+            background: #006e52;
+            box-shadow: 0 2px 4px rgba(0, 128, 96, 0.2);
         }
 
-        .btn-login:disabled {
+        .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
             box-shadow: none;
         }
 
+        .btn-secondary {
+            background: var(--shopify-white);
+            color: var(--shopify-text);
+            border: 1px solid var(--shopify-border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--shopify-hover);
+            border-color: var(--shopify-text-secondary);
+            text-decoration: none;
+            color: var(--shopify-text);
+        }
+
         .error-message {
-            background: #fed7d7;
-            color: #c53030;
+            background: #FFF4F4;
+            color: var(--shopify-error);
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 13px;
             display: none;
+            border: 1px solid #FED7D7;
+        }
+
+        .success-message {
+            background: #E3F1DF;
+            color: var(--shopify-success);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+            border: 1px solid #C6F6D5;
+        }
+
+        .form-actions {
+            margin-top: 32px;
         }
 
         .back-link {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 24px;
         }
 
-        .back-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .divider {
+            border: none;
+            border-top: 1px solid var(--shopify-border);
+            margin: 32px 0 24px;
         }
 
-        .back-link a:hover {
-            color: #764ba2;
-            text-decoration: underline;
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
 
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
         @media (max-width: 480px) {
             .login-container {
-                padding: 30px 20px;
-                margin: 20px;
+                padding: 32px 24px;
+                margin: 16px;
             }
 
             .login-title {
-                font-size: 1.8rem;
+                font-size: 20px;
             }
+        }
+
+        /* Focus visible for accessibility */
+        .btn-primary:focus-visible,
+        .btn-secondary:focus-visible,
+        .form-input:focus-visible {
+            outline: 2px solid var(--shopify-green);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <div class="logo">
-            <img src="logo.jpg" alt="Logo del evento">
+        <div class="login-header">
+            <div class="logo">ET</div>
+            <h1 class="login-title">Sign in</h1>
+            <p class="login-subtitle">Access your admin dashboard</p>
         </div>
         
-        <h1 class="login-title">Iniciar Sesión</h1>
-        <p class="login-subtitle">Accede al panel de administración</p>
-        
         <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
         
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" placeholder="admin@aguasabiertaschile.com" required>
+                <label for="email" class="form-label">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-input"
+                    placeholder="admin@eventtickets.com" 
+                    required
+                    autocomplete="email"
+                >
             </div>
             
             <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" placeholder="Tu contraseña" required>
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    class="form-input"
+                    placeholder="Enter your password" 
+                    required
+                    autocomplete="current-password"
+                >
             </div>
             
-            <button type="submit" class="btn-login" id="loginButton">
-                🔐 Iniciar Sesión
-            </button>
+            <div class="form-actions">
+                <button type="submit" class="btn-primary" id="loginButton">
+                    <span id="loginIcon">🔐</span>
+                    <span id="loginText">Sign in</span>
+                </button>
+            </div>
         </form>
         
+        <hr class="divider">
+        
         <div class="back-link">
-            <a href="index.html">← Volver a la página principal</a>
+            <a href="index.html" class="btn-secondary">
+                ← Back to main page
+            </a>
         </div>
     </div>
 
@@ -212,14 +301,18 @@
             e.preventDefault();
             
             const loginButton = document.getElementById('loginButton');
+            const loginIcon = document.getElementById('loginIcon');
+            const loginText = document.getElementById('loginText');
             const errorMessage = document.getElementById('errorMessage');
-            const originalButtonText = loginButton.textContent;
+            const successMessage = document.getElementById('successMessage');
             
-            // Hide previous error messages
+            // Hide previous messages
             errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
             
             // Show loading state
-            loginButton.textContent = '⏳ Iniciando sesión...';
+            loginIcon.innerHTML = '<div class="loading-spinner"></div>';
+            loginText.textContent = 'Signing in...';
             loginButton.disabled = true;
             
             const formData = {
@@ -244,11 +337,17 @@
                     localStorage.setItem('tokenType', result.token_type || 'bearer');
                     localStorage.setItem('tokenExpiry', Date.now() + (result.expires_in * 1000));
                     
-                    // Redirect to dashboard
-                    window.location.href = 'dashboard.html';
+                    // Show success message briefly
+                    successMessage.textContent = 'Login successful! Redirecting...';
+                    successMessage.style.display = 'block';
+                    
+                    // Redirect to dashboard after short delay
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
                 } else {
                     const errorData = await response.json().catch(() => ({}));
-                    let errorText = 'Credenciales incorrectas. Por favor verifica tu email y contraseña.';
+                    let errorText = 'Invalid credentials. Please check your email and password.';
                     
                     if (errorData.detail) {
                         if (Array.isArray(errorData.detail)) {
@@ -263,11 +362,12 @@
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                errorMessage.textContent = 'Error de conexión. Por favor intenta más tarde.';
+                errorMessage.textContent = 'Connection error. Please try again later.';
                 errorMessage.style.display = 'block';
             } finally {
                 // Reset button state
-                loginButton.textContent = originalButtonText;
+                loginIcon.textContent = '🔐';
+                loginText.textContent = 'Sign in';
                 loginButton.disabled = false;
             }
         });
@@ -281,6 +381,20 @@
                 // User is already logged in, redirect to dashboard
                 window.location.href = 'dashboard.html';
             }
+        });
+
+        // Handle keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Alt + B to go back
+            if (e.altKey && e.key === 'b') {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Auto-focus email field
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email').focus();
         });
     </script>
 </body>

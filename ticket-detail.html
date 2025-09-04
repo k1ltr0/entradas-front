@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details - Event Ticketing Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --shopify-bg: #F6F6F7;
+            --shopify-sidebar: #1A1C23;
+            --shopify-text: #202223;
+            --shopify-text-secondary: #6D7175;
+            --shopify-green: #008060;
+            --shopify-blue: #006FBB;
+            --shopify-border: #E1E3E5;
+            --shopify-white: #FFFFFF;
+            --shopify-hover: #F7F8FA;
+            --shopify-success: #008060;
+            --shopify-warning: #F1A817;
+            --shopify-error: #D72C0D;
+            --shopify-info: #006FBB;
+            --shopify-badge-green: #E3F1DF;
+            --shopify-badge-yellow: #FFF5EA;
+            --shopify-badge-red: #FFF4F4;
+            --shopify-badge-gray: #F2F3F3;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--shopify-bg);
+            color: var(--shopify-text);
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar (same as dashboard) */
+        .sidebar {
+            width: 240px;
+            background: var(--shopify-sidebar);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #2E3136;
+        }
+
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid #2E3136;
+        }
+
+        .store-switcher {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #2E3136;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .store-switcher:hover {
+            background: #393C43;
+        }
+
+        .store-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--shopify-green);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .store-info {
+            flex: 1;
+        }
+
+        .store-name {
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .store-url {
+            color: #8A8D91;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 16px 8px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            margin: 2px 0;
+            border-radius: 6px;
+            color: #C9CCCF;
+            text-decoration: none;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: #2E3136;
+            color: #FFFFFF;
+        }
+
+        .nav-item.active {
+            background: #2E3136;
+            color: #FFFFFF;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.9;
+        }
+
+        .nav-section {
+            margin: 24px 0;
+        }
+
+        .nav-section-title {
+            padding: 8px 12px;
+            color: #8A8D91;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Content Wrapper */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            height: 56px;
+            background: var(--shopify-white);
+            border-bottom: 1px solid var(--shopify-border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .breadcrumb-item {
+            color: var(--shopify-text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.15s;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--shopify-text);
+        }
+
+        .breadcrumb-separator {
+            color: var(--shopify-text-secondary);
+            margin: 0 4px;
+        }
+
+        .breadcrumb-current {
+            color: var(--shopify-text);
+            font-weight: 500;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .icon-button {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--shopify-text-secondary);
+            transition: all 0.15s;
+        }
+
+        .icon-button:hover {
+            background: var(--shopify-hover);
+            color: var(--shopify-text);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .user-menu:hover {
+            background: var(--shopify-hover);
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: var(--shopify-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ticket-id-badge {
+            background: var(--shopify-green);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--shopify-text);
+        }
+
+        .page-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--shopify-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #006e52;
+            box-shadow: 0 2px 4px rgba(0, 128, 96, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--shopify-white);
+            color: var(--shopify-text);
+            border: 1px solid var(--shopify-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--shopify-hover);
+            border-color: var(--shopify-text-secondary);
+            text-decoration: none;
+            color: var(--shopify-text);
+        }
+
+        /* Content Layout */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+        }
+
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--shopify-white);
+            border: 1px solid var(--shopify-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--shopify-border);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--shopify-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        .card-section {
+            margin-bottom: 16px;
+        }
+
+        .card-section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Detail Items */
+        .detail-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--shopify-hover);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--shopify-text-secondary);
+            font-weight: 500;
+            flex-shrink: 0;
+            width: 120px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            color: var(--shopify-text);
+            font-weight: 500;
+            text-align: right;
+            flex: 1;
+        }
+
+        .detail-value.highlight {
+            color: var(--shopify-green);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .badge-success {
+            background: var(--shopify-badge-green);
+            color: var(--shopify-success);
+        }
+
+        .badge-warning {
+            background: var(--shopify-badge-yellow);
+            color: var(--shopify-warning);
+        }
+
+        .badge-error {
+            background: var(--shopify-badge-red);
+            color: var(--shopify-error);
+        }
+
+        .badge-neutral {
+            background: var(--shopify-badge-gray);
+            color: var(--shopify-text-secondary);
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: var(--shopify-hover);
+            border: 1px solid var(--shopify-border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .notes-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--shopify-text);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-content {
+            font-size: 13px;
+            color: var(--shopify-text);
+            line-height: 1.5;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: var(--shopify-text-secondary);
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--shopify-border);
+            border-top-color: var(--shopify-green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .error-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--shopify-hover);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+
+        .error-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--shopify-text);
+            margin-bottom: 8px;
+        }
+
+        .error-description {
+            color: var(--shopify-text-secondary);
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--shopify-white);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 480px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: translateY(-20px);
+            transition: transform 0.15s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--shopify-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--shopify-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--shopify-text-secondary);
+            font-size: 20px;
+            transition: all 0.15s;
+        }
+
+        .modal-close:hover {
+            background: var(--shopify-hover);
+            color: var(--shopify-text);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--shopify-text);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--shopify-border);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--shopify-text);
+            background: var(--shopify-white);
+            transition: all 0.15s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--shopify-green);
+            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+        }
+
+        .form-help {
+            font-size: 12px;
+            color: var(--shopify-text-secondary);
+            margin-top: 6px;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--shopify-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-loading {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn-loading::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            margin: -8px 0 0 -8px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn-loading span {
+            opacity: 0;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            border: 1px solid transparent;
+        }
+
+        .alert-success {
+            background: var(--shopify-badge-green);
+            color: var(--shopify-success);
+            border-color: #c3e6cb;
+        }
+
+        .alert-error {
+            background: var(--shopify-badge-red);
+            color: var(--shopify-error);
+            border-color: #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .sidebar-section {
+                order: -1;
+            }
+
+            .main-content {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -240px;
+                z-index: 1000;
+                transition: left 0.3s;
+            }
+
+            .sidebar.mobile-open {
+                left: 0;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .detail-label {
+                width: auto;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="store-switcher">
+                    <div class="store-icon">ET</div>
+                    <div class="store-info">
+                        <div class="store-name">Event Tickets</div>
+                        <div class="store-url">Platform Admin</div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-item" onclick="window.location.href='dashboard.html'">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Sales</div>
+                    <div class="nav-item active">
+                        <span class="nav-icon">🎫</span>
+                        <span>Tickets</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📊</span>
+                        <span>Analytics</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">👥</span>
+                        <span>Customers</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Content</div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📅</span>
+                        <span>Events</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📢</span>
+                        <span>Marketing</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">💸</span>
+                        <span>Discounts</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Settings</div>
+                    <div class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        <span>General</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">💳</span>
+                        <span>Payments</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">🔔</span>
+                        <span>Notifications</span>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <nav class="breadcrumb">
+                    <a href="dashboard.html" class="breadcrumb-item">Dashboard</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="dashboard.html" class="breadcrumb-item">Tickets</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current" id="breadcrumbTicketId">Loading...</span>
+                </nav>
+
+                <div class="top-bar-actions">
+                    <button class="icon-button">
+                        <span>🔔</span>
+                    </button>
+                    <button class="icon-button">
+                        <span>❓</span>
+                    </button>
+                    <div class="user-menu" onclick="logout()">
+                        <div class="user-avatar">A</div>
+                        <span style="font-size: 13px; color: var(--shopify-text-secondary);">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div id="loadingContent" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading ticket details...</p>
+                </div>
+
+                <div id="errorContent" class="error-state" style="display: none;">
+                    <div class="error-icon">⚠️</div>
+                    <h3 class="error-title">Ticket not found</h3>
+                    <p class="error-description">The ticket you're looking for doesn't exist or may have been deleted.</p>
+                    <a href="dashboard.html" class="btn btn-primary" style="margin-top: 16px;">← Back to Dashboard</a>
+                </div>
+
+                <div id="ticketContent" style="display: none;">
+                    <div class="page-header">
+                        <div class="page-title-section">
+                            <div class="ticket-id-badge" id="ticketIdBadge">#0</div>
+                            <h1 class="page-title" id="ticketTitle">Ticket Details</h1>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="showResendEmailModal()">
+                                <span>📧</span> Resend Email
+                            </button>
+                            <button class="btn btn-secondary" onclick="window.print()">
+                                <span>🖨️</span> Print
+                            </button>
+                            <a href="dashboard.html" class="btn btn-secondary">
+                                <span>←</span> Back
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="content-layout">
+                        <div class="main-section">
+                            <!-- Customer Information -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">
+                                        <span>👤</span> Customer Information
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-grid" id="customerDetails">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Information -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">
+                                        <span>🏊</span> Event Information
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-grid" id="eventDetails">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <!-- Payment Information -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">
+                                        <span>💳</span> Payment
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-grid" id="paymentDetails">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timeline -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">
+                                        <span>📅</span> Timeline
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-grid" id="timelineDetails">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes Section (conditional) -->
+                    <div id="notesSection" class="notes-section" style="display: none;">
+                        <div class="notes-title">
+                            <span>📝</span> Additional Notes
+                        </div>
+                        <div class="notes-content" id="notesContent">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Resend Email Modal -->
+    <div id="resendEmailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <span>📧</span> Resend Ticket Email
+                </h2>
+                <button type="button" class="modal-close" onclick="hideResendEmailModal()">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalAlert" style="display: none;"></div>
+                <form id="resendEmailForm">
+                    <div class="form-group">
+                        <label class="form-label" for="resendEmailInput">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="resendEmailInput" 
+                            class="form-input" 
+                            placeholder="Enter email address"
+                            required
+                        />
+                        <div class="form-help">
+                            A copy of the ticket will be sent to this email address
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="hideResendEmailModal()">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="sendEmailBtn" onclick="resendEmail()">
+                    <span>Send Email</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ticket = null;
+
+        // Get ticket ID from URL parameters
+        function getTicketIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (error) {
+                return 'Invalid date';
+            }
+        }
+
+        // Get status badge HTML
+        function getBadgeHTML(status) {
+            const statusMap = {
+                'approved': { class: 'success', text: 'Paid' },
+                'paid': { class: 'success', text: 'Paid' },
+                'pending': { class: 'warning', text: 'Pending' },
+                'failed': { class: 'error', text: 'Failed' },
+                'rejected': { class: 'error', text: 'Rejected' },
+                'cancelled': { class: 'neutral', text: 'Cancelled' }
+            };
+
+            const config = statusMap[status] || { class: 'neutral', text: status || 'Unknown' };
+            return `<span class="badge badge-${config.class}">${config.text}</span>`;
+        }
+
+        // Load ticket details
+        async function loadTicketDetails(ticketId) {
+            const token = localStorage.getItem('authToken');
+            const tokenType = localStorage.getItem('tokenType') || 'bearer';
+
+            try {
+                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${tokenType} ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const tickets = await response.json();
+                    let allTickets = [];
+                    
+                    if (Array.isArray(tickets)) {
+                        allTickets = tickets;
+                    } else if (tickets && Array.isArray(tickets.tickets)) {
+                        allTickets = tickets.tickets;
+                    } else if (tickets && tickets.data && Array.isArray(tickets.data)) {
+                        allTickets = tickets.data;
+                    }
+
+                    ticket = allTickets.find(t => t.id == ticketId);
+                    
+                    if (ticket) {
+                        displayTicketDetails(ticket);
+                    } else {
+                        showError();
+                    }
+                } else if (response.status === 401) {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('tokenType');
+                    localStorage.removeItem('tokenExpiry');
+                    window.location.href = 'login.html';
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Error loading ticket:', error);
+                showError();
+            }
+        }
+
+        // Display ticket details
+        function displayTicketDetails(ticket) {
+            document.getElementById('loadingContent').style.display = 'none';
+            document.getElementById('ticketContent').style.display = 'block';
+
+            // Update page title and breadcrumb
+            document.getElementById('ticketIdBadge').textContent = `#${ticket.id}`;
+            document.getElementById('ticketTitle').textContent = ticket.name || 'Ticket Details';
+            document.getElementById('breadcrumbTicketId').textContent = `Ticket #${ticket.id}`;
+
+            // Customer Details
+            document.getElementById('customerDetails').innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Full Name</span>
+                    <span class="detail-value">${ticket.name || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">${ticket.email || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value">${ticket.phone || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Age</span>
+                    <span class="detail-value">${ticket.age || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Gender</span>
+                    <span class="detail-value">${ticket.gender || 'N/A'}</span>
+                </div>
+            `;
+
+            // Event Details
+            document.getElementById('eventDetails').innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Category</span>
+                    <span class="detail-value">${ticket.category || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Distance</span>
+                    <span class="detail-value">${ticket.distance ? ticket.distance + ' meters' : 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Club</span>
+                    <span class="detail-value">${ticket.club || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Test Type</span>
+                    <span class="detail-value">${ticket.test_type || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Stage</span>
+                    <span class="detail-value">${ticket.stage || 'N/A'}</span>
+                </div>
+            `;
+
+            // Payment Details
+            document.getElementById('paymentDetails').innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Amount</span>
+                    <span class="detail-value highlight">$${(ticket.price || 0).toLocaleString('en-US')}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Payment Status</span>
+                    <span class="detail-value">${getBadgeHTML(ticket.payment_status)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Ticket Status</span>
+                    <span class="detail-value">${getBadgeHTML(ticket.status)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Payment ID</span>
+                    <span class="detail-value">${ticket.payment_id || 'N/A'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">MP Reference</span>
+                    <span class="detail-value">${ticket.mercado_pago_id || 'N/A'}</span>
+                </div>
+            `;
+
+            // Timeline Details
+            document.getElementById('timelineDetails').innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Purchase Date</span>
+                    <span class="detail-value">${formatDate(ticket.purchase_date)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Created At</span>
+                    <span class="detail-value">${formatDate(ticket.created_at)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Updated At</span>
+                    <span class="detail-value">${formatDate(ticket.updated_at)}</span>
+                </div>
+            `;
+
+            // Notes Section (if exists)
+            if (ticket.notes) {
+                document.getElementById('notesSection').style.display = 'block';
+                document.getElementById('notesContent').textContent = ticket.notes;
+            }
+        }
+
+        // Show error state
+        function showError() {
+            document.getElementById('loadingContent').style.display = 'none';
+            document.getElementById('errorContent').style.display = 'flex';
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('tokenType');
+            localStorage.removeItem('tokenExpiry');
+            window.location.href = 'login.html';
+        }
+
+        // Check authentication and load ticket details on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('authToken');
+            const tokenExpiry = localStorage.getItem('tokenExpiry');
+
+            if (!token || !tokenExpiry || Date.now() >= parseInt(tokenExpiry)) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const ticketId = getTicketIdFromURL();
+            if (!ticketId) {
+                showError();
+                return;
+            }
+
+            loadTicketDetails(ticketId);
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu')?.addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('mobile-open');
+        });
+
+        // Modal functions
+        function showResendEmailModal() {
+            if (!ticket || !ticket.email) {
+                showAlert('error', 'Unable to find ticket email address');
+                return;
+            }
+
+            // Pre-fill with ticket email
+            document.getElementById('resendEmailInput').value = ticket.email;
+            
+            // Clear any previous alerts
+            hideAlert();
+            
+            // Show modal
+            document.getElementById('resendEmailModal').classList.add('active');
+            document.getElementById('resendEmailInput').focus();
+        }
+
+        function hideResendEmailModal() {
+            document.getElementById('resendEmailModal').classList.remove('active');
+            document.getElementById('resendEmailForm').reset();
+            hideAlert();
+        }
+
+        function showAlert(type, message) {
+            const alertElement = document.getElementById('modalAlert');
+            alertElement.className = `alert alert-${type}`;
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
+        }
+
+        function hideAlert() {
+            const alertElement = document.getElementById('modalAlert');
+            alertElement.style.display = 'none';
+        }
+
+        async function resendEmail() {
+            const emailInput = document.getElementById('resendEmailInput');
+            const sendBtn = document.getElementById('sendEmailBtn');
+            const email = emailInput.value.trim();
+
+            // Validate email
+            if (!email) {
+                showAlert('error', 'Please enter an email address');
+                emailInput.focus();
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showAlert('error', 'Please enter a valid email address');
+                emailInput.focus();
+                return;
+            }
+
+            // Show loading state
+            sendBtn.classList.add('btn-loading');
+            hideAlert();
+
+            try {
+                const token = localStorage.getItem('authToken');
+                const tokenType = localStorage.getItem('tokenType') || 'bearer';
+
+                const requestBody = {
+                    ticket_id: ticket.id,
+                    custom_email: email !== ticket.email ? email : null
+                };
+
+                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets/resend-email', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `${tokenType} ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (response.ok) {
+                    showAlert('success', `Email sent successfully to ${email}`);
+                    
+                    // Close modal after 2 seconds
+                    setTimeout(() => {
+                        hideResendEmailModal();
+                    }, 2000);
+                } else if (response.status === 401) {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('tokenType');
+                    localStorage.removeItem('tokenExpiry');
+                    window.location.href = 'login.html';
+                } else {
+                    const errorData = await response.json();
+                    const errorMessage = errorData.detail || errorData.message || 'Failed to send email';
+                    showAlert('error', errorMessage);
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                showAlert('error', 'Network error occurred. Please try again.');
+            } finally {
+                // Remove loading state
+                sendBtn.classList.remove('btn-loading');
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('resendEmailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideResendEmailModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('resendEmailModal').classList.contains('active')) {
+                hideResendEmailModal();
+            }
+        });
+    </script>
+</body>
+</html>
