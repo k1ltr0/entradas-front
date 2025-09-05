@@ -706,6 +706,241 @@
             border-color: #f5c6cb;
         }
 
+        /* Print Styles */
+        @media print {
+            * {
+                color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 10px;
+                line-height: 1.1;
+                color: #000;
+                background: white;
+                margin: 0;
+                padding: 8px;
+            }
+
+            .app-container {
+                display: block;
+                height: auto;
+                overflow: visible;
+            }
+
+            .sidebar,
+            .top-bar,
+            .page-actions,
+            .breadcrumb,
+            .user-menu,
+            .modal,
+            .btn,
+            .nav-menu,
+            .icon-button {
+                display: none !important;
+            }
+
+            .main-wrapper {
+                display: block;
+            }
+
+            .main-content {
+                padding: 0;
+                max-width: none;
+                margin: 0;
+                overflow: visible;
+            }
+
+            .content-layout {
+                display: flex;
+                gap: 20px;
+                margin-top: 15px;
+            }
+
+            .main-section {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .sidebar-section {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .print-header {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+                border-bottom: 1px solid #000;
+                grid-column: 1 / -1;
+            }
+
+            .print-title {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+
+            .print-subtitle {
+                font-size: 10px;
+                color: #666;
+                margin-bottom: 4px;
+            }
+
+            .print-ticket-id {
+                font-size: 12px;
+                font-weight: bold;
+                margin: 4px 0;
+                padding: 3px 8px;
+                border: 1px solid #000;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .page-header {
+                display: none;
+            }
+
+            .card {
+                flex: 1;
+                border: 1px solid #ccc;
+                border-radius: 0;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card-header {
+                background: #f0f0f0;
+                border-bottom: 1px solid #ccc;
+                padding: 8px 12px;
+                margin: 0;
+            }
+
+            .card-title {
+                font-size: 13px;
+                font-weight: bold;
+                color: #000;
+                margin: 0;
+            }
+
+            .card-body {
+                padding: 12px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .detail-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 6px 0;
+                border-bottom: none;
+                break-inside: avoid;
+                margin-bottom: 4px;
+            }
+
+            .detail-item:last-child {
+                border-bottom: none;
+            }
+
+            .detail-label {
+                font-weight: bold;
+                color: #333;
+                width: 100px;
+                flex-shrink: 0;
+                font-size: 11px;
+            }
+
+            .detail-value {
+                color: #000;
+                text-align: right;
+                flex: 1;
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .detail-value.highlight {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+
+            .badge {
+                background: none !important;
+                color: #000 !important;
+                border: 1px solid #000;
+                padding: 1px 3px;
+                font-size: 7px;
+                text-transform: uppercase;
+            }
+
+            .notes-section {
+                grid-column: 1 / -1;
+                margin-top: 6px;
+                padding: 4px;
+                border: 1px solid #ddd;
+                background: none;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .notes-title {
+                font-weight: bold;
+                margin-bottom: 3px;
+                color: #000;
+                font-size: 9px;
+            }
+
+            .notes-content {
+                color: #333;
+                line-height: 1.2;
+                font-size: 8px;
+            }
+
+            .print-footer {
+                display: block !important;
+                grid-column: 1 / -1;
+                margin-top: 8px;
+                padding-top: 4px;
+                border-top: 1px solid #ccc;
+                text-align: center;
+                font-size: 7px;
+                color: #666;
+                page-break-inside: avoid;
+            }
+
+            .print-footer div {
+                margin: 1px 0;
+            }
+
+            /* Ensure single page */
+            @page {
+                size: A4;
+                margin: 0.5cm;
+            }
+
+            /* Compact spacing */
+            h1, h2, h3 {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .print-header,
+        .print-footer {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .content-layout {
@@ -867,6 +1102,13 @@
                 </div>
 
                 <div id="ticketContent" style="display: none;">
+                    <!-- Print Header (only visible when printing) -->
+                    <div class="print-header">
+                        <div class="print-title">Event Ticketing Platform</div>
+                        <div class="print-subtitle">Official Ticket Receipt</div>
+                        <div class="print-ticket-id" id="printTicketId">#0</div>
+                    </div>
+
                     <div class="page-header">
                         <div class="page-title-section">
                             <div class="ticket-id-badge" id="ticketIdBadge">#0</div>
@@ -955,6 +1197,13 @@
                         <div class="notes-content" id="notesContent">
                             <!-- Will be populated by JavaScript -->
                         </div>
+                    </div>
+
+                    <!-- Print Footer (only visible when printing) -->
+                    <div class="print-footer">
+                        <div>This ticket is valid for the event specified above.</div>
+                        <div>Generated on <span id="printDate"></span></div>
+                        <div>© Event Ticketing Platform - All Rights Reserved</div>
                     </div>
                 </div>
             </main>
@@ -1098,6 +1347,16 @@
             document.getElementById('ticketIdBadge').textContent = `#${ticket.id}`;
             document.getElementById('ticketTitle').textContent = ticket.name || 'Ticket Details';
             document.getElementById('breadcrumbTicketId').textContent = `Ticket #${ticket.id}`;
+            
+            // Update print elements
+            document.getElementById('printTicketId').textContent = `#${ticket.id}`;
+            document.getElementById('printDate').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
 
             // Customer Details
             document.getElementById('customerDetails').innerHTML = `
@@ -1154,20 +1413,12 @@
                     <span class="detail-value highlight">$${(ticket.price || 0).toLocaleString('en-US')}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Payment Status</span>
+                    <span class="detail-label">Status</span>
                     <span class="detail-value">${getBadgeHTML(ticket.payment_status)}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Ticket Status</span>
-                    <span class="detail-value">${getBadgeHTML(ticket.status)}</span>
-                </div>
-                <div class="detail-item">
                     <span class="detail-label">Payment ID</span>
-                    <span class="detail-value">${ticket.payment_id || 'N/A'}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">MP Reference</span>
-                    <span class="detail-value">${ticket.mercado_pago_id || 'N/A'}</span>
+                    <span class="detail-value">${(ticket.payment_id || 'N/A').substring(0, 12)}${(ticket.payment_id || '').length > 12 ? '...' : ''}</span>
                 </div>
             `;
 
@@ -1178,12 +1429,8 @@
                     <span class="detail-value">${formatDate(ticket.purchase_date)}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Created At</span>
+                    <span class="detail-label">Created</span>
                     <span class="detail-value">${formatDate(ticket.created_at)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Updated At</span>
-                    <span class="detail-value">${formatDate(ticket.updated_at)}</span>
                 </div>
             `;
 

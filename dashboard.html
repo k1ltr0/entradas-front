@@ -453,6 +453,32 @@
             border-bottom: 1px solid var(--shopify-border);
         }
 
+        .sortable-header {
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            transition: all 0.15s;
+        }
+
+        .sortable-header:hover {
+            background: var(--shopify-border);
+            color: var(--shopify-text);
+        }
+
+        .sort-indicator {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .sort-indicator.active {
+            opacity: 1;
+            color: var(--shopify-green);
+        }
+
         .data-table td {
             padding: 12px 20px;
             border-bottom: 1px solid var(--shopify-border);
@@ -784,6 +810,7 @@
     <script>
         let allTickets = [];
         let filteredTickets = [];
+        let currentSort = { field: 'purchase_date', direction: 'desc' };
 
         // Check authentication on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -835,6 +862,7 @@
                     filteredTickets = [...allTickets];
                     updateStats();
                     updateCategoryFilter();
+                    applySorting();
                     renderTicketsTable();
                 } else if (response.status === 401) {
                     localStorage.removeItem('authToken');
@@ -905,13 +933,34 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Customer</th>
-                            <th>Email</th>
-                            <th>Category</th>
-                            <th>Distance</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                            <th>Payment</th>
+                            <th class="sortable-header" onclick="sortTable('name')">
+                                Customer
+                                <span class="sort-indicator ${currentSort.field === 'name' ? 'active' : ''}">${getSortIcon('name')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('email')">
+                                Email
+                                <span class="sort-indicator ${currentSort.field === 'email' ? 'active' : ''}">${getSortIcon('email')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('category')">
+                                Category
+                                <span class="sort-indicator ${currentSort.field === 'category' ? 'active' : ''}">${getSortIcon('category')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('distance')">
+                                Distance
+                                <span class="sort-indicator ${currentSort.field === 'distance' ? 'active' : ''}">${getSortIcon('distance')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('price')">
+                                Amount
+                                <span class="sort-indicator ${currentSort.field === 'price' ? 'active' : ''}">${getSortIcon('price')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('purchase_date')">
+                                Date
+                                <span class="sort-indicator ${currentSort.field === 'purchase_date' ? 'active' : ''}">${getSortIcon('purchase_date')}</span>
+                            </th>
+                            <th class="sortable-header" onclick="sortTable('payment_status')">
+                                Payment
+                                <span class="sort-indicator ${currentSort.field === 'payment_status' ? 'active' : ''}">${getSortIcon('payment_status')}</span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -976,7 +1025,63 @@
                 return statusMatch && categoryMatch && distanceMatch;
             });
 
+            applySorting();
             renderTicketsTable();
+        }
+
+        function sortTable(field) {
+            if (currentSort.field === field) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.field = field;
+                currentSort.direction = 'asc';
+            }
+            
+            applySorting();
+            renderTicketsTable();
+        }
+
+        function applySorting() {
+            if (!currentSort.field) return;
+            
+            filteredTickets.sort((a, b) => {
+                let aValue = a[currentSort.field];
+                let bValue = b[currentSort.field];
+                
+                // Handle different data types
+                if (currentSort.field === 'purchase_date') {
+                    aValue = new Date(aValue || 0);
+                    bValue = new Date(bValue || 0);
+                } else if (currentSort.field === 'price' || currentSort.field === 'distance') {
+                    aValue = Number(aValue) || 0;
+                    bValue = Number(bValue) || 0;
+                } else if (currentSort.field === 'payment_status') {
+                    // Sort by status priority: paid/approved, pending, failed, cancelled
+                    const statusPriority = {
+                        'approved': 0, 'paid': 0,
+                        'pending': 1,
+                        'failed': 2, 'rejected': 2,
+                        'cancelled': 3
+                    };
+                    aValue = statusPriority[aValue] !== undefined ? statusPriority[aValue] : 4;
+                    bValue = statusPriority[bValue] !== undefined ? statusPriority[bValue] : 4;
+                } else {
+                    // String comparison
+                    aValue = (aValue || '').toString().toLowerCase();
+                    bValue = (bValue || '').toString().toLowerCase();
+                }
+                
+                if (currentSort.direction === 'asc') {
+                    return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                } else {
+                    return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                }
+            });
+        }
+
+        function getSortIcon(field) {
+            if (currentSort.field !== field) return '↕';
+            return currentSort.direction === 'asc' ? '↑' : '↓';
         }
 
 
@@ -1012,8 +1117,6 @@
 
 
 
-        // Auto-refresh every 30 seconds
-        setInterval(loadTickets, 30000);
     </script>
 </body>
 </html>
