@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Event Ticketing Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SheetJS library for Excel export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1095,7 +1097,88 @@
         }
 
         function exportData() {
-            alert('Export functionality coming soon!');
+            // Check if XLSX library is loaded
+            if (typeof XLSX === 'undefined') {
+                alert('Excel export library is not loaded. Please refresh the page and try again.');
+                return;
+            }
+
+            // Use all tickets without filtering
+            const ticketsToExport = allTickets;
+
+            if (ticketsToExport.length === 0) {
+                alert('No tickets to export.');
+                return;
+            }
+
+            try {
+                // Prepare data for Excel
+                const excelData = ticketsToExport.map(ticket => ({
+                    'Ticket ID': ticket.id || 'N/A',
+                    'Customer Name': ticket.name || 'N/A',
+                    'Email': ticket.email || 'N/A',
+                    'Phone': ticket.phone || 'N/A',
+                    'DNI': ticket.dni || 'N/A',
+                    'Category': ticket.category || 'N/A',
+                    'Distance': ticket.distance ? `${ticket.distance}m` : 'N/A',
+                    'Price': `$${(ticket.price || 0).toFixed(2)}`,
+                    'Purchase Date': formatDate(ticket.purchase_date),
+                    'Payment Status': ticket.payment_status || ticket.status || 'N/A',
+                    'Payment ID': ticket.payment_id || 'N/A',
+                    'MercadoPago ID': ticket.mercadopago_payment_id || 'N/A',
+                    'Terms Accepted': ticket.terms_accepted ? 'Yes' : 'No'
+                }));
+
+                // Create workbook and worksheet
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.json_to_sheet(excelData);
+
+                // Auto-size columns (only if there's data)
+                if (excelData.length > 0) {
+                    const maxWidth = 30;
+                    const wscols = Object.keys(excelData[0]).map(key => {
+                        const maxLength = Math.max(
+                            key.length,
+                            ...excelData.map(row => String(row[key] || '').length)
+                        );
+                        return { wch: Math.min(maxLength + 2, maxWidth) };
+                    });
+                    ws['!cols'] = wscols;
+                }
+
+                // Add worksheet to workbook
+                XLSX.utils.book_append_sheet(wb, ws, 'All Tickets');
+
+                // Generate filename with timestamp
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const filename = `tickets_export_${year}-${month}-${day}_${hours}-${minutes}.xlsx`;
+
+                // Download the file
+                XLSX.writeFile(wb, filename);
+
+                // Show success message
+                console.log(`Successfully exported ${ticketsToExport.length} tickets`);
+                // Optional: show a temporary success message instead of console.log
+                const exportBtn = document.querySelector('.btn-secondary');
+                const originalText = exportBtn.innerHTML;
+                exportBtn.innerHTML = '<span>✓</span> Exported!';
+                exportBtn.style.background = 'var(--shopify-success)';
+                exportBtn.style.color = 'white';
+                setTimeout(() => {
+                    exportBtn.innerHTML = originalText;
+                    exportBtn.style.background = '';
+                    exportBtn.style.color = '';
+                }, 2000);
+            } catch (error) {
+                console.error('Error exporting tickets:', error);
+                console.error('Error details:', error.message, error.stack);
+                alert(`Failed to export tickets: ${error.message}`);
+            }
         }
 
         function showSection(section) {
