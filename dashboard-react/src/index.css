@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --shopify-bg: #F6F6F7;
+  --shopify-sidebar: #1A1C23;
+  --shopify-text: #202223;
+  --shopify-text-secondary: #6D7175;
+  --shopify-green: #008060;
+  --shopify-blue: #006FBB;
+  --shopify-border: #E1E3E5;
+  --shopify-white: #FFFFFF;
+  --shopify-hover: #F7F8FA;
+  --shopify-success: #008060;
+  --shopify-warning: #F1A817;
+  --shopify-error: #D72C0D;
+  --shopify-info: #006FBB;
+  --shopify-badge-green: #E3F1DF;
+  --shopify-badge-yellow: #FFF5EA;
+  --shopify-badge-red: #FFF4F4;
+  --shopify-badge-gray: #F2F3F3;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--shopify-bg);
+  color: var(--shopify-text);
+  line-height: 1.4;
+  font-size: 14px;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
