@@ -40,7 +40,7 @@ const Login: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
