@@ -91,7 +91,7 @@ const Dashboard: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tickets`, {
         method: 'GET',
         headers: {
           'Authorization': `${tokenType} ${token}`,
