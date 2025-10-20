@@ -601,11 +601,13 @@
                                 <div class="price-title">Preventa Prueba Relevo</div>
                                 <div class="price-value">$60.000.-</div>
                             </div>
-                            <div class="price-card">
+                            <div class="price-card agotada">
+                                <span class="agotada-label">FINALIZADA</span>
                                 <div class="price-title">Venta General Prueba Individual</div>
                                 <div class="price-value">$35.000.-</div>
                             </div>
-                            <div class="price-card">
+                            <div class="price-card agotada">
+                                <span class="agotada-label">FINALIZADA</span>
                                 <div class="price-title">Venta General Prueba Relevo</div>
                                 <div class="price-value">$90.000.-</div>
                             </div>
@@ -647,8 +649,11 @@
             </div>
 
             <div class="ticket-form">
-                <h2>¡Reserva tu lugar ahora!</h2>
-                <form id="ticketForm">
+                <h2>Venta de Entradas Finalizada</h2>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px; opacity: 0.95;">
+                    La venta de entradas para este evento ha finalizado. ¡Gracias por tu interés!
+                </p>
+                <form id="ticketForm" style="opacity: 0.5; pointer-events: none;">
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="name">Nombre completo</label>
@@ -684,10 +689,10 @@
                         </div>
                         <div class="form-group">
                             <label for="stage">Etapa</label>
-                            <select id="stage" required>
+                            <select id="stage" required disabled>
                                 <option value="">Selecciona una etapa</option>
                                 <option value="preventa" disabled>Preventa (Finalizada)</option>
-                                <option value="general">Venta General</option>
+                                <option value="general" disabled>Venta General (Finalizada)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -704,7 +709,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" id="buyButton">🎯 Comprar Entrada</button>
+                    <button type="submit" id="buyButton" disabled>🚫 Venta Finalizada</button>
                 </form>
             </div>
         </div>
