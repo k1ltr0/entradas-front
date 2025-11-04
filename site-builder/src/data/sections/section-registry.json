@@ -1,0 +1,111 @@
+{
+  "sections": [
+    {
+      "type": "hero",
+      "name": "Hero",
+      "description": "Banner principal con título, subtítulo y llamado a la acción",
+      "icon": "🎯",
+      "defaultData": {
+        "title": "Bienvenido a tu evento",
+        "subtitle": "Un evento increíble que no te puedes perder",
+        "backgroundImage": "",
+        "ctaText": "Comprar entradas",
+        "ctaLink": "#pricing",
+        "layout": "centered",
+        "overlay": true
+      }
+    },
+    {
+      "type": "pricing",
+      "name": "Precios",
+      "description": "Sección de precios y venta de entradas",
+      "icon": "💳",
+      "defaultData": {
+        "title": "Entradas",
+        "description": "Elige la entrada perfecta para ti",
+        "tickets": [
+          {
+            "id": "general",
+            "name": "Entrada General",
+            "price": 50,
+            "currency": "$",
+            "description": "Acceso al evento",
+            "features": ["Acceso general", "Material del evento"],
+            "available": true
+          }
+        ],
+        "columns": 3
+      }
+    },
+    {
+      "type": "gallery",
+      "name": "Galería",
+      "description": "Galería de imágenes del evento",
+      "icon": "🖼️",
+      "defaultData": {
+        "title": "Galería",
+        "images": [
+          {
+            "id": "img1",
+            "url": "https://via.placeholder.com/600x400",
+            "alt": "Imagen del evento",
+            "caption": "Evento anterior"
+          }
+        ],
+        "layout": "grid",
+        "columns": 3
+      }
+    },
+    {
+      "type": "about",
+      "name": "Acerca de",
+      "description": "Información sobre el evento",
+      "icon": "ℹ️",
+      "defaultData": {
+        "title": "Acerca del evento",
+        "content": "<p>Información detallada sobre el evento.</p>",
+        "image": "https://via.placeholder.com/600x400",
+        "imagePosition": "left"
+      }
+    },
+    {
+      "type": "schedule",
+      "name": "Agenda",
+      "description": "Cronograma del evento",
+      "icon": "📅",
+      "defaultData": {
+        "title": "Agenda",
+        "events": [
+          {
+            "id": "event1",
+            "time": "10:00",
+            "title": "Apertura",
+            "description": "Ceremonia de apertura del evento",
+            "speaker": "Equipo organizador",
+            "location": "Sala Principal"
+          }
+        ],
+        "layout": "timeline"
+      }
+    },
+    {
+      "type": "contact",
+      "name": "Contacto",
+      "description": "Información de contacto",
+      "icon": "📧",
+      "defaultData": {
+        "title": "Contacto",
+        "email": "info@evento.com",
+        "phone": "+1234567890",
+        "address": "Dirección del evento",
+        "mapUrl": "",
+        "socialLinks": [
+          {
+            "platform": "Facebook",
+            "url": "https://facebook.com"
+          }
+        ]
+      }
+    }
+  ]
+}

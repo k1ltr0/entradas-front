@@ -1,0 +1,373 @@
+{
+  "builder": {
+    "title": "Site Builder",
+    "edit": "Edit",
+    "preview": "Preview",
+    "exportJson": "JSON",
+    "exportHtml": "HTML",
+    "save": "Save",
+    "publish": "Publish",
+    "saveSuccess": "Page saved successfully",
+    "publishSuccess": "Page published successfully",
+    "exportJsonTooltip": "Export JSON",
+    "exportHtmlTooltip": "Export HTML"
+  },
+  "sidebar": {
+    "layers": "Layers",
+    "settings": "Settings",
+    "layersTitle": "Section Layers",
+    "noSections": "No sections on the page",
+    "addSection": "+ Add Section",
+    "selectSection": "Select a section",
+    "close": "✕",
+    "deleteConfirm": "Delete this section?",
+    "noSelection": "Select a section to edit it",
+    "closeEditor": "Close",
+    "pageSettings": "Page Settings",
+    "titleLabel": "Title",
+    "moreSettings": "More configuration options coming soon..."
+  },
+  "canvas": {
+    "noPage": "No page loaded",
+    "selectTemplate": "Select a template to get started",
+    "addSections": "Add sections from the side panel",
+    "hiddenSection": "Hidden section"
+  },
+  "templates": {
+    "title": "Choose a Template",
+    "categories": {
+      "all": "All",
+      "events": "Events",
+      "conferences": "Conferences",
+      "concerts": "Concerts"
+    },
+    "sectionsCount": "sections",
+    "useTemplate": "Use Template",
+    "startBlank": "Start from Scratch",
+    "blankName": "Blank Template",
+    "blankDescription": "Start from scratch",
+    "newPage": "New Page",
+    "basicEvent": {
+      "name": "Basic Event",
+      "description": "Simple and effective template for any type of event"
+    },
+    "conference": {
+      "name": "Conference",
+      "description": "Professional template for conferences and seminars"
+    },
+    "concert": {
+      "name": "Concert",
+      "description": "Vibrant template for concerts and music festivals"
+    }
+  },
+  "sections": {
+    "hero": {
+      "name": "Hero",
+      "description": "Main section with title, subtitle, and call to action",
+      "defaultTitle": "Welcome to your event",
+      "defaultSubtitle": "An amazing event you can't miss",
+      "defaultCta": "Buy tickets"
+    },
+    "pricing": {
+      "name": "Pricing",
+      "description": "Display ticket prices in cards",
+      "defaultTitle": "Tickets",
+      "defaultDescription": "Choose the perfect ticket for you",
+      "buy": "Buy",
+      "soldOut": "Sold Out",
+      "tickets": {
+        "general": {
+          "name": "General Admission",
+          "description": "Event access",
+          "features": ["General access", "Event materials"]
+        }
+      }
+    },
+    "gallery": {
+      "name": "Gallery",
+      "description": "Display images in different layouts",
+      "defaultTitle": "Gallery",
+      "defaultAlt": "Event image",
+      "defaultCaption": "Previous event"
+    },
+    "about": {
+      "name": "About",
+      "description": "Informational section with image and content",
+      "defaultTitle": "About the event",
+      "defaultContent": "<p>Detailed information about the event.</p>"
+    },
+    "schedule": {
+      "name": "Schedule",
+      "description": "Event schedule with times",
+      "defaultTitle": "Schedule",
+      "speakerLabel": "By:",
+      "locationIcon": "📍",
+      "defaultEvent": {
+        "title": "Opening",
+        "description": "Event opening ceremony",
+        "speaker": "Organizing team",
+        "location": "Main Hall"
+      }
+    },
+    "contact": {
+      "name": "Contact",
+      "description": "Contact information and location",
+      "defaultTitle": "Contact",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "addressLabel": "Address",
+      "followLabel": "Follow us",
+      "mapTitle": "Location map",
+      "defaultEmail": "info@event.com",
+      "defaultPhone": "+1234567890",
+      "defaultAddress": "Event address",
+      "defaultSocial": "Facebook"
+    }
+  },
+  "templateContent": {
+    "basicEvent": {
+      "pageTitle": "My Event",
+      "heroTitle": "Welcome to Our Event",
+      "heroSubtitle": "An unforgettable experience awaits you",
+      "heroCta": "View Tickets",
+      "aboutTitle": "About the Event",
+      "aboutContent": "<p>Join us for an extraordinary event that will bring together professionals, enthusiasts, and industry leaders.</p><p>Enjoy unique experiences, high-level networking, and valuable content that will transform your perspective.</p>",
+      "pricingTitle": "Tickets",
+      "pricingDescription": "Select the option that best suits your needs",
+      "tickets": {
+        "earlyBird": {
+          "name": "Early Bird",
+          "description": "Special price for early booking",
+          "features": [
+            "Full event access",
+            "Digital event materials",
+            "Certificate of participation",
+            "Coffee break included"
+          ]
+        },
+        "general": {
+          "name": "General Admission",
+          "description": "Standard event access",
+          "features": [
+            "Event access",
+            "Digital materials",
+            "Attendance certificate"
+          ]
+        },
+        "vip": {
+          "name": "VIP",
+          "description": "Complete premium experience",
+          "features": [
+            "Priority VIP access",
+            "Exclusive physical materials",
+            "Special certificate",
+            "Gourmet lunch included",
+            "VIP area access",
+            "Meet & greet with speakers"
+          ]
+        }
+      },
+      "contactTitle": "Contact Us",
+      "contactEmail": "info@myevent.com",
+      "contactPhone": "+34 123 456 789",
+      "contactAddress": "Event Street 123, Madrid, Spain"
+    },
+    "conference": {
+      "pageTitle": "Conference 2025",
+      "heroTitle": "Annual Conference 2025",
+      "heroSubtitle": "Innovation, Technology, and Future",
+      "heroCta": "Register Now",
+      "aboutTitle": "About the Conference",
+      "aboutContent": "<p>The leading technology and innovation conference bringing together the best professionals in the sector.</p><ul><li>Over 30 expert speakers</li><li>20+ sessions and workshops</li><li>Networking with industry leaders</li><li>Emerging technologies exhibition</li></ul>",
+      "scheduleTitle": "Event Agenda",
+      "scheduleEvents": [
+        {
+          "time": "09:00",
+          "title": "Registration and Welcome",
+          "description": "Attendee reception and credential delivery",
+          "speaker": "Organizing team",
+          "location": "Main Hall"
+        },
+        {
+          "time": "10:00",
+          "title": "Opening Keynote",
+          "description": "The future of technology: 2025 Trends",
+          "speaker": "Dr. Maria González",
+          "location": "Main Auditorium"
+        },
+        {
+          "time": "11:30",
+          "title": "Panel: AI and Machine Learning",
+          "description": "Practical AI applications in business",
+          "speaker": "Various experts",
+          "location": "Room A"
+        },
+        {
+          "time": "13:00",
+          "title": "Lunch and Networking",
+          "description": "Opportunity to connect with other attendees",
+          "location": "Dining Area"
+        },
+        {
+          "time": "14:30",
+          "title": "Workshop: Cloud Computing",
+          "description": "Modern cloud architectures",
+          "speaker": "Eng. Carlos Ruiz",
+          "location": "Room B"
+        },
+        {
+          "time": "16:00",
+          "title": "Coffee Break",
+          "description": "Coffee and networking break",
+          "location": "Break Area"
+        },
+        {
+          "time": "16:30",
+          "title": "Session: Cybersecurity",
+          "description": "Protecting your digital infrastructure",
+          "speaker": "Ana Martínez",
+          "location": "Room C"
+        },
+        {
+          "time": "18:00",
+          "title": "Closing and Cocktail",
+          "description": "Closing ceremony and farewell cocktail",
+          "location": "Terrace"
+        }
+      ],
+      "pricingTitle": "Available Passes",
+      "pricingDescription": "Investment in your professional development",
+      "tickets": {
+        "student": {
+          "name": "Student",
+          "description": "Special rate for students",
+          "features": [
+            "Access to all sessions",
+            "Digital materials",
+            "Digital certificate",
+            "30-day recording access"
+          ]
+        },
+        "professional": {
+          "name": "Professional",
+          "description": "Standard pass for professionals",
+          "features": [
+            "Full event access",
+            "Physical and digital materials",
+            "Attendance certificate",
+            "Lunch included",
+            "90-day recording access"
+          ]
+        },
+        "business": {
+          "name": "Business",
+          "description": "Premium package for companies",
+          "features": [
+            "VIP access to all sessions",
+            "Exclusive materials",
+            "Premium certificate",
+            "All meals included",
+            "Unlimited recording access",
+            "Private sessions with speakers",
+            "Exhibition area space"
+          ]
+        }
+      },
+      "galleryTitle": "Previous Events Gallery",
+      "contactTitle": "Contact Information",
+      "contactEmail": "info@conference2025.com",
+      "contactPhone": "+34 900 123 456",
+      "contactAddress": "Convention Center, Main Ave. 456, Barcelona, Spain"
+    },
+    "concert": {
+      "pageTitle": "Live Concert",
+      "heroTitle": "MUSIC FESTIVAL 2025",
+      "heroSubtitle": "3 days · 30 artists · An unforgettable experience",
+      "heroCta": "Buy Tickets",
+      "aboutTitle": "The Biggest Festival of the Year",
+      "aboutContent": "<p>Get ready to experience the most epic musical event of the year. Three days of non-stop music with the best national and international artists.</p><p><strong>What's included?</strong></p><ul><li>30+ artists on 3 stages</li><li>Gourmet food truck area</li><li>Camping area</li><li>Activities and workshops</li><li>Official merchandise zone</li></ul>",
+      "scheduleTitle": "Line-Up",
+      "scheduleEvents": [
+        {
+          "time": "18:00",
+          "title": "Main Artist",
+          "description": "Headliner - Main Stage",
+          "location": "Main Stage"
+        },
+        {
+          "time": "19:30",
+          "title": "International Band",
+          "description": "International show - Main Stage",
+          "location": "Main Stage"
+        },
+        {
+          "time": "21:00",
+          "title": "DJ Set",
+          "description": "Electronic session - Electro Stage",
+          "location": "Electro Stage"
+        },
+        {
+          "time": "22:30",
+          "title": "Headliner",
+          "description": "Main closing act",
+          "location": "Main Stage"
+        }
+      ],
+      "pricingTitle": "Tickets",
+      "pricingDescription": "Choose your pass and get ready for the experience",
+      "tickets": {
+        "oneDay": {
+          "name": "1-Day Pass",
+          "description": "Access to one day of the festival",
+          "features": [
+            "Access to all stages",
+            "Activities and workshops",
+            "Food truck discount",
+            "Official festival wristband"
+          ]
+        },
+        "threeDay": {
+          "name": "3-Day Pass",
+          "description": "Entry for all 3 days of the festival",
+          "features": [
+            "Full 3-day access",
+            "All stages",
+            "Activities included",
+            "Food discounts",
+            "Official merchandise",
+            "Priority access"
+          ]
+        },
+        "vip": {
+          "name": "VIP 3-Day",
+          "description": "Complete VIP experience",
+          "features": [
+            "Exclusive VIP area",
+            "Preferred stage access",
+            "Premium drinks included",
+            "Private restrooms",
+            "Reserved parking",
+            "Meet & greet with artists",
+            "Exclusive VIP merchandise"
+          ]
+        },
+        "camping": {
+          "name": "Camping",
+          "description": "Includes camping area",
+          "features": [
+            "3-day pass",
+            "Camping zone",
+            "Showers and facilities",
+            "Chill-out area",
+            "24h security"
+          ]
+        }
+      },
+      "galleryTitle": "Relive Previous Editions",
+      "contactTitle": "Information",
+      "contactEmail": "info@musicfestival.com",
+      "contactPhone": "+34 800 MUSIC",
+      "contactAddress": "Festival Fairgrounds, Valencia, Spain"
+    }
+  }
+}

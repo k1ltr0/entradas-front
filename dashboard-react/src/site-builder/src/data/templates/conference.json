@@ -1,0 +1,215 @@
+{
+  "id": "conference",
+  "name": "Conferencia",
+  "description": "Plantilla profesional para conferencias y seminarios",
+  "thumbnail": "/templates/conference.jpg",
+  "category": "conference",
+  "metadata": {
+    "title": "Conferencia 2025",
+    "description": "Conferencia profesional",
+    "theme": "light",
+    "primaryColor": "#2196f3",
+    "secondaryColor": "#ff9800",
+    "fontFamily": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  },
+  "sections": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "order": 0,
+      "props": {
+        "layout": "left"
+      }
+    },
+    {
+      "id": "about-1",
+      "type": "about",
+      "order": 1,
+      "props": {
+        "imagePosition": "right"
+      }
+    },
+    {
+      "id": "schedule-1",
+      "type": "schedule",
+      "order": 2,
+      "props": {
+        "layout": "timeline"
+      }
+    },
+    {
+      "id": "pricing-1",
+      "type": "pricing",
+      "order": 3,
+      "props": {
+        "columns": 2
+      }
+    },
+    {
+      "id": "gallery-1",
+      "type": "gallery",
+      "order": 4,
+      "props": {
+        "layout": "grid",
+        "columns": 4
+      }
+    },
+    {
+      "id": "contact-1",
+      "type": "contact",
+      "order": 5,
+      "props": {}
+    }
+  ],
+  "defaultData": {
+    "hero-1": {
+      "title": "Conferencia Anual 2025",
+      "subtitle": "Innovación, Tecnología y Futuro",
+      "backgroundImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920",
+      "ctaText": "Registrarse Ahora",
+      "ctaLink": "#pricing-1",
+      "layout": "left",
+      "overlay": true
+    },
+    "about-1": {
+      "title": "Acerca de la Conferencia",
+      "content": "<p>Nuestra conferencia anual reúne a líderes de la industria, innovadores y profesionales para explorar las últimas tendencias y tecnologías.</p><h3>¿Qué esperar?</h3><ul><li>Charlas inspiradoras de expertos</li><li>Talleres prácticos</li><li>Networking con profesionales</li><li>Exhibición de tecnología</li></ul>",
+      "image": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800",
+      "imagePosition": "right"
+    },
+    "schedule-1": {
+      "title": "Agenda del Evento",
+      "layout": "timeline",
+      "events": [
+        {
+          "id": "registration",
+          "time": "08:00 - 09:00",
+          "title": "Registro y Bienvenida",
+          "description": "Recogida de credenciales y desayuno de networking",
+          "location": "Hall Principal"
+        },
+        {
+          "id": "keynote",
+          "time": "09:00 - 10:30",
+          "title": "Keynote: El Futuro de la Tecnología",
+          "speaker": "Dr. María González",
+          "description": "Charla magistral sobre las tendencias tecnológicas",
+          "location": "Auditorio Principal"
+        },
+        {
+          "id": "break1",
+          "time": "10:30 - 11:00",
+          "title": "Coffee Break",
+          "location": "Área de Networking"
+        },
+        {
+          "id": "workshop1",
+          "time": "11:00 - 12:30",
+          "title": "Taller: Innovación en la Práctica",
+          "speaker": "Equipo Tech",
+          "description": "Taller práctico sobre metodologías de innovación",
+          "location": "Sala A"
+        },
+        {
+          "id": "lunch",
+          "time": "12:30 - 14:00",
+          "title": "Almuerzo",
+          "location": "Comedor"
+        },
+        {
+          "id": "panel",
+          "time": "14:00 - 15:30",
+          "title": "Panel: Transformación Digital",
+          "speaker": "Varios Expertos",
+          "description": "Discusión sobre el impacto de la transformación digital",
+          "location": "Auditorio Principal"
+        }
+      ]
+    },
+    "pricing-1": {
+      "title": "Pases Disponibles",
+      "description": "Opciones de registro para la conferencia",
+      "tickets": [
+        {
+          "id": "standard",
+          "name": "Pase Estándar",
+          "price": 299,
+          "currency": "$",
+          "description": "Acceso completo a la conferencia",
+          "features": [
+            "Acceso a todas las charlas",
+            "Material del evento",
+            "Coffee breaks incluidos",
+            "Almuerzo incluido",
+            "Certificado digital"
+          ],
+          "available": true
+        },
+        {
+          "id": "premium",
+          "name": "Pase Premium",
+          "price": 499,
+          "currency": "$",
+          "description": "Experiencia VIP completa",
+          "features": [
+            "Todo del pase estándar",
+            "Acceso a talleres exclusivos",
+            "Sesiones de networking VIP",
+            "Kit premium del evento",
+            "Grabaciones de las charlas"
+          ],
+          "available": true
+        }
+      ],
+      "columns": 2
+    },
+    "gallery-1": {
+      "title": "Galería de Eventos Anteriores",
+      "layout": "grid",
+      "columns": 4,
+      "images": [
+        {
+          "id": "img1",
+          "url": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600",
+          "alt": "Conferencia 2024",
+          "caption": "Keynote 2024"
+        },
+        {
+          "id": "img2",
+          "url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600",
+          "alt": "Networking",
+          "caption": "Sesiones de networking"
+        },
+        {
+          "id": "img3",
+          "url": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600",
+          "alt": "Talleres",
+          "caption": "Talleres prácticos"
+        },
+        {
+          "id": "img4",
+          "url": "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=600",
+          "alt": "Auditorio",
+          "caption": "Auditorio principal"
+        }
+      ]
+    },
+    "contact-1": {
+      "title": "Información de Contacto",
+      "email": "info@conferencia2025.com",
+      "phone": "+1 555 123 4567",
+      "address": "Centro de Convenciones, Ciudad Principal",
+      "mapUrl": "",
+      "socialLinks": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com"
+        },
+        {
+          "platform": "Twitter",
+          "url": "https://twitter.com"
+        }
+      ]
+    }
+  }
+}

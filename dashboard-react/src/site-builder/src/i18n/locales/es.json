@@ -1,0 +1,373 @@
+{
+  "builder": {
+    "title": "Site Builder",
+    "edit": "Editar",
+    "preview": "Vista Previa",
+    "exportJson": "JSON",
+    "exportHtml": "HTML",
+    "save": "Guardar",
+    "publish": "Publicar",
+    "saveSuccess": "Página guardada exitosamente",
+    "publishSuccess": "Página publicada exitosamente",
+    "exportJsonTooltip": "Exportar JSON",
+    "exportHtmlTooltip": "Exportar HTML"
+  },
+  "sidebar": {
+    "layers": "Capas",
+    "settings": "Configuración",
+    "layersTitle": "Capas de Secciones",
+    "noSections": "No hay secciones en la página",
+    "addSection": "+ Agregar Sección",
+    "selectSection": "Selecciona una sección",
+    "close": "✕",
+    "deleteConfirm": "¿Eliminar esta sección?",
+    "noSelection": "Selecciona una sección para editarla",
+    "closeEditor": "Cerrar",
+    "pageSettings": "Configuración de Página",
+    "titleLabel": "Título",
+    "moreSettings": "Más opciones de configuración próximamente..."
+  },
+  "canvas": {
+    "noPage": "No hay página cargada",
+    "selectTemplate": "Selecciona una plantilla para comenzar",
+    "addSections": "Agrega secciones desde el panel lateral",
+    "hiddenSection": "Sección oculta"
+  },
+  "templates": {
+    "title": "Elige una Plantilla",
+    "categories": {
+      "all": "Todos",
+      "events": "Eventos",
+      "conferences": "Conferencias",
+      "concerts": "Conciertos"
+    },
+    "sectionsCount": "secciones",
+    "useTemplate": "Usar Plantilla",
+    "startBlank": "Comenzar desde Cero",
+    "blankName": "Plantilla en Blanco",
+    "blankDescription": "Comienza desde cero",
+    "newPage": "Nueva Página",
+    "basicEvent": {
+      "name": "Evento Básico",
+      "description": "Plantilla simple y efectiva para cualquier tipo de evento"
+    },
+    "conference": {
+      "name": "Conferencia",
+      "description": "Plantilla profesional para conferencias y seminarios"
+    },
+    "concert": {
+      "name": "Concierto",
+      "description": "Plantilla vibrante para conciertos y festivales de música"
+    }
+  },
+  "sections": {
+    "hero": {
+      "name": "Hero",
+      "description": "Sección principal con título, subtítulo y llamada a la acción",
+      "defaultTitle": "Bienvenido a tu evento",
+      "defaultSubtitle": "Un evento increíble que no te puedes perder",
+      "defaultCta": "Comprar entradas"
+    },
+    "pricing": {
+      "name": "Precios",
+      "description": "Muestra los precios de las entradas en tarjetas",
+      "defaultTitle": "Entradas",
+      "defaultDescription": "Elige la entrada perfecta para ti",
+      "buy": "Comprar",
+      "soldOut": "Agotado",
+      "tickets": {
+        "general": {
+          "name": "Entrada General",
+          "description": "Acceso al evento",
+          "features": ["Acceso general", "Material del evento"]
+        }
+      }
+    },
+    "gallery": {
+      "name": "Galería",
+      "description": "Muestra imágenes en diferentes diseños",
+      "defaultTitle": "Galería",
+      "defaultAlt": "Imagen del evento",
+      "defaultCaption": "Evento anterior"
+    },
+    "about": {
+      "name": "Acerca de",
+      "description": "Sección informativa con imagen y contenido",
+      "defaultTitle": "Acerca del evento",
+      "defaultContent": "<p>Información detallada sobre el evento.</p>"
+    },
+    "schedule": {
+      "name": "Agenda",
+      "description": "Cronograma del evento con horarios",
+      "defaultTitle": "Agenda",
+      "speakerLabel": "Por:",
+      "locationIcon": "📍",
+      "defaultEvent": {
+        "title": "Apertura",
+        "description": "Ceremonia de apertura del evento",
+        "speaker": "Equipo organizador",
+        "location": "Sala Principal"
+      }
+    },
+    "contact": {
+      "name": "Contacto",
+      "description": "Información de contacto y ubicación",
+      "defaultTitle": "Contacto",
+      "emailLabel": "Email",
+      "phoneLabel": "Teléfono",
+      "addressLabel": "Dirección",
+      "followLabel": "Síguenos",
+      "mapTitle": "Mapa de ubicación",
+      "defaultEmail": "info@evento.com",
+      "defaultPhone": "+1234567890",
+      "defaultAddress": "Dirección del evento",
+      "defaultSocial": "Facebook"
+    }
+  },
+  "templateContent": {
+    "basicEvent": {
+      "pageTitle": "Mi Evento",
+      "heroTitle": "Bienvenido a Nuestro Evento",
+      "heroSubtitle": "Una experiencia inolvidable te espera",
+      "heroCta": "Ver Entradas",
+      "aboutTitle": "Sobre el Evento",
+      "aboutContent": "<p>Únete a nosotros para un evento extraordinario que reunirá a profesionales, entusiastas y líderes de la industria.</p><p>Disfruta de experiencias únicas, networking de alto nivel y contenido de valor que transformará tu perspectiva.</p>",
+      "pricingTitle": "Entradas",
+      "pricingDescription": "Selecciona la opción que mejor se adapte a tus necesidades",
+      "tickets": {
+        "earlyBird": {
+          "name": "Early Bird",
+          "description": "Precio especial por reserva anticipada",
+          "features": [
+            "Acceso completo al evento",
+            "Material digital del evento",
+            "Certificado de participación",
+            "Coffee break incluido"
+          ]
+        },
+        "general": {
+          "name": "Entrada General",
+          "description": "Acceso estándar al evento",
+          "features": [
+            "Acceso al evento",
+            "Material digital",
+            "Certificado de asistencia"
+          ]
+        },
+        "vip": {
+          "name": "VIP",
+          "description": "Experiencia premium completa",
+          "features": [
+            "Acceso VIP prioritario",
+            "Material físico exclusivo",
+            "Certificado especial",
+            "Almuerzo gourmet incluido",
+            "Acceso a área VIP",
+            "Meet & greet con speakers"
+          ]
+        }
+      },
+      "contactTitle": "Contáctanos",
+      "contactEmail": "info@mievento.com",
+      "contactPhone": "+34 123 456 789",
+      "contactAddress": "Calle del Evento 123, Madrid, España"
+    },
+    "conference": {
+      "pageTitle": "Conferencia 2025",
+      "heroTitle": "Conferencia Anual 2025",
+      "heroSubtitle": "Innovación, Tecnología y Futuro",
+      "heroCta": "Registrarse Ahora",
+      "aboutTitle": "Acerca de la Conferencia",
+      "aboutContent": "<p>La conferencia líder en tecnología e innovación que reúne a los mejores profesionales del sector.</p><ul><li>Más de 30 ponentes expertos</li><li>20+ sesiones y talleres</li><li>Networking con líderes de la industria</li><li>Exhibición de tecnologías emergentes</li></ul>",
+      "scheduleTitle": "Agenda del Evento",
+      "scheduleEvents": [
+        {
+          "time": "09:00",
+          "title": "Registro y Bienvenida",
+          "description": "Recepción de asistentes y entrega de credenciales",
+          "speaker": "Equipo organizador",
+          "location": "Hall Principal"
+        },
+        {
+          "time": "10:00",
+          "title": "Keynote de Apertura",
+          "description": "El futuro de la tecnología: Tendencias 2025",
+          "speaker": "Dr. María González",
+          "location": "Auditorio Principal"
+        },
+        {
+          "time": "11:30",
+          "title": "Panel: IA y Machine Learning",
+          "description": "Aplicaciones prácticas de IA en empresas",
+          "speaker": "Varios expertos",
+          "location": "Sala A"
+        },
+        {
+          "time": "13:00",
+          "title": "Almuerzo y Networking",
+          "description": "Oportunidad para conectar con otros asistentes",
+          "location": "Área de Comedor"
+        },
+        {
+          "time": "14:30",
+          "title": "Workshop: Cloud Computing",
+          "description": "Arquitecturas modernas en la nube",
+          "speaker": "Ing. Carlos Ruiz",
+          "location": "Sala B"
+        },
+        {
+          "time": "16:00",
+          "title": "Coffee Break",
+          "description": "Pausa para café y networking",
+          "location": "Área de Descanso"
+        },
+        {
+          "time": "16:30",
+          "title": "Sesión: Ciberseguridad",
+          "description": "Protegiendo tu infraestructura digital",
+          "speaker": "Ana Martínez",
+          "location": "Sala C"
+        },
+        {
+          "time": "18:00",
+          "title": "Cierre y Cocktail",
+          "description": "Ceremonia de cierre y cóctel de despedida",
+          "location": "Terraza"
+        }
+      ],
+      "pricingTitle": "Pases Disponibles",
+      "pricingDescription": "Inversión en tu desarrollo profesional",
+      "tickets": {
+        "student": {
+          "name": "Estudiante",
+          "description": "Tarifa especial para estudiantes",
+          "features": [
+            "Acceso a todas las sesiones",
+            "Material digital",
+            "Certificado digital",
+            "Acceso a grabaciones por 30 días"
+          ]
+        },
+        "professional": {
+          "name": "Profesional",
+          "description": "Pase estándar para profesionales",
+          "features": [
+            "Acceso completo al evento",
+            "Material físico y digital",
+            "Certificado de asistencia",
+            "Almuerzo incluido",
+            "Acceso a grabaciones por 90 días"
+          ]
+        },
+        "business": {
+          "name": "Business",
+          "description": "Paquete premium para empresas",
+          "features": [
+            "Acceso VIP a todas las sesiones",
+            "Material exclusivo",
+            "Certificado premium",
+            "Todas las comidas incluidas",
+            "Acceso ilimitado a grabaciones",
+            "Sesiones privadas con speakers",
+            "Espacio en área de exhibición"
+          ]
+        }
+      },
+      "galleryTitle": "Galería de Eventos Anteriores",
+      "contactTitle": "Información de Contacto",
+      "contactEmail": "info@conferencia2025.com",
+      "contactPhone": "+34 900 123 456",
+      "contactAddress": "Centro de Convenciones, Av. Principal 456, Barcelona, España"
+    },
+    "concert": {
+      "pageTitle": "Concierto en Vivo",
+      "heroTitle": "FESTIVAL DE MÚSICA 2025",
+      "heroSubtitle": "3 días · 30 artistas · Una experiencia inolvidable",
+      "heroCta": "Comprar Entradas",
+      "aboutTitle": "El Festival Más Grande del Año",
+      "aboutContent": "<p>Prepárate para vivir la experiencia musical más épica del año. Tres días de música ininterrumpida con los mejores artistas nacionales e internacionales.</p><p><strong>¿Qué incluye?</strong></p><ul><li>30+ artistas en 3 escenarios</li><li>Zona de food trucks gourmet</li><li>Área de camping</li><li>Actividades y talleres</li><li>Zona de merchandising oficial</li></ul>",
+      "scheduleTitle": "Line-Up",
+      "scheduleEvents": [
+        {
+          "time": "18:00",
+          "title": "Artista Principal",
+          "description": "Cabeza de cartel - Escenario Principal",
+          "location": "Escenario Principal"
+        },
+        {
+          "time": "19:30",
+          "title": "Banda Internacional",
+          "description": "Espectáculo internacional - Escenario Principal",
+          "location": "Escenario Principal"
+        },
+        {
+          "time": "21:00",
+          "title": "DJ Set",
+          "description": "Sesión electrónica - Escenario Electro",
+          "location": "Escenario Electro"
+        },
+        {
+          "time": "22:30",
+          "title": "Headliner",
+          "description": "Acto principal de cierre",
+          "location": "Escenario Principal"
+        }
+      ],
+      "pricingTitle": "Entradas",
+      "pricingDescription": "Elige tu pase y prepárate para la experiencia",
+      "tickets": {
+        "oneDay": {
+          "name": "Pase de 1 Día",
+          "description": "Acceso a un día del festival",
+          "features": [
+            "Acceso a todos los escenarios",
+            "Actividades y talleres",
+            "Descuento en food trucks",
+            "Pulsera oficial del festival"
+          ]
+        },
+        "threeDay": {
+          "name": "Pase 3 Días",
+          "description": "Entrada para los 3 días del festival",
+          "features": [
+            "Acceso completo 3 días",
+            "Todos los escenarios",
+            "Actividades incluidas",
+            "Descuentos en comida",
+            "Merchandise oficial",
+            "Acceso prioritario"
+          ]
+        },
+        "vip": {
+          "name": "VIP 3 Días",
+          "description": "Experiencia VIP completa",
+          "features": [
+            "Área VIP exclusiva",
+            "Acceso preferente a escenarios",
+            "Bebidas premium incluidas",
+            "Baños privados",
+            "Parking reservado",
+            "Meet & greet con artistas",
+            "Merchandise exclusivo VIP"
+          ]
+        },
+        "camping": {
+          "name": "Camping",
+          "description": "Incluye zona de acampada",
+          "features": [
+            "Pase de 3 días",
+            "Zona de camping",
+            "Duchas y servicios",
+            "Área de chill-out",
+            "Seguridad 24h"
+          ]
+        }
+      },
+      "galleryTitle": "Revive Ediciones Anteriores",
+      "contactTitle": "Información",
+      "contactEmail": "info@festivalmúsica.com",
+      "contactPhone": "+34 800 MUSIC",
+      "contactAddress": "Recinto Ferial del Festival, Valencia, España"
+    }
+  }
+}

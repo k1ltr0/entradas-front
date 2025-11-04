@@ -1,0 +1,43 @@
+.page-renderer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.page-renderer.dark {
+  background-color: #1a1a1a;
+}
+
+.page-renderer.dark * {
+  color: #fff;
+}
+
+.section-editable {
+  position: relative;
+  cursor: pointer;
+  transition: outline 0.2s ease;
+}
+
+.section-editable:hover {
+  outline: 2px dashed #4ecdc4;
+  outline-offset: 4px;
+}
+
+.section-editable:hover::after {
+  content: 'Click to edit';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #4ecdc4;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.section-view {
+  width: 100%;
+}

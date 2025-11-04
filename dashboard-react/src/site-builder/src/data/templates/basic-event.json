@@ -1,0 +1,133 @@
+{
+  "id": "basic-event",
+  "name": "Evento Básico",
+  "description": "Plantilla simple y efectiva para cualquier tipo de evento",
+  "thumbnail": "/templates/basic-event.jpg",
+  "category": "event",
+  "metadata": {
+    "title": "Mi Evento",
+    "description": "Un evento increíble",
+    "theme": "light",
+    "primaryColor": "#ff6b6b",
+    "secondaryColor": "#4ecdc4",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  },
+  "sections": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "order": 0,
+      "props": {
+        "layout": "centered"
+      }
+    },
+    {
+      "id": "about-1",
+      "type": "about",
+      "order": 1,
+      "props": {
+        "imagePosition": "left"
+      }
+    },
+    {
+      "id": "pricing-1",
+      "type": "pricing",
+      "order": 2,
+      "props": {
+        "columns": 3
+      }
+    },
+    {
+      "id": "contact-1",
+      "type": "contact",
+      "order": 3,
+      "props": {}
+    }
+  ],
+  "defaultData": {
+    "hero-1": {
+      "title": "Bienvenido a Nuestro Evento",
+      "subtitle": "Una experiencia inolvidable te espera",
+      "backgroundImage": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920",
+      "ctaText": "Ver Entradas",
+      "ctaLink": "#pricing-1",
+      "layout": "centered",
+      "overlay": true
+    },
+    "about-1": {
+      "title": "Sobre el Evento",
+      "content": "<p>Únete a nosotros para una experiencia única. Este evento reúne a profesionales y entusiastas de todo el mundo para compartir conocimientos, hacer networking y disfrutar de un ambiente increíble.</p><p>No te pierdas esta oportunidad de ser parte de algo especial.</p>",
+      "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800",
+      "imagePosition": "left"
+    },
+    "pricing-1": {
+      "title": "Entradas Disponibles",
+      "description": "Elige la entrada perfecta para ti",
+      "tickets": [
+        {
+          "id": "early-bird",
+          "name": "Early Bird",
+          "price": 50,
+          "currency": "$",
+          "description": "Precio especial por reserva anticipada",
+          "features": [
+            "Acceso completo al evento",
+            "Material digital",
+            "Certificado de asistencia"
+          ],
+          "available": true
+        },
+        {
+          "id": "general",
+          "name": "Entrada General",
+          "price": 75,
+          "currency": "$",
+          "description": "Entrada estándar al evento",
+          "features": [
+            "Acceso completo al evento",
+            "Material digital",
+            "Certificado de asistencia",
+            "Coffee break"
+          ],
+          "available": true
+        },
+        {
+          "id": "vip",
+          "name": "VIP",
+          "price": 150,
+          "currency": "$",
+          "description": "Experiencia premium",
+          "features": [
+            "Todo lo anterior",
+            "Asientos preferenciales",
+            "Meet & greet",
+            "Kit exclusivo"
+          ],
+          "available": true
+        }
+      ],
+      "columns": 3
+    },
+    "contact-1": {
+      "title": "Contáctanos",
+      "email": "info@mievento.com",
+      "phone": "+1 234 567 890",
+      "address": "Calle Principal 123, Ciudad",
+      "mapUrl": "",
+      "socialLinks": [
+        {
+          "platform": "Facebook",
+          "url": "https://facebook.com"
+        },
+        {
+          "platform": "Twitter",
+          "url": "https://twitter.com"
+        },
+        {
+          "platform": "Instagram",
+          "url": "https://instagram.com"
+        }
+      ]
+    }
+  }
+}

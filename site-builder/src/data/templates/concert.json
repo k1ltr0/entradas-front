@@ -1,0 +1,236 @@
+{
+  "id": "concert",
+  "name": "Concierto",
+  "description": "Plantilla vibrante para conciertos y festivales de música",
+  "thumbnail": "/templates/concert.jpg",
+  "category": "concert",
+  "metadata": {
+    "title": "Concierto en Vivo",
+    "description": "La mejor experiencia musical",
+    "theme": "dark",
+    "primaryColor": "#e91e63",
+    "secondaryColor": "#9c27b0",
+    "fontFamily": "'Arial Black', Arial, sans-serif"
+  },
+  "sections": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "order": 0,
+      "props": {
+        "layout": "centered"
+      }
+    },
+    {
+      "id": "about-1",
+      "type": "about",
+      "order": 1,
+      "props": {
+        "imagePosition": "left"
+      }
+    },
+    {
+      "id": "schedule-1",
+      "type": "schedule",
+      "order": 2,
+      "props": {
+        "layout": "list"
+      }
+    },
+    {
+      "id": "pricing-1",
+      "type": "pricing",
+      "order": 3,
+      "props": {
+        "columns": 4
+      }
+    },
+    {
+      "id": "gallery-1",
+      "type": "gallery",
+      "order": 4,
+      "props": {
+        "layout": "masonry",
+        "columns": 3
+      }
+    },
+    {
+      "id": "contact-1",
+      "type": "contact",
+      "order": 5,
+      "props": {}
+    }
+  ],
+  "defaultData": {
+    "hero-1": {
+      "title": "FESTIVAL DE MÚSICA 2025",
+      "subtitle": "3 días · 30 artistas · Una experiencia inolvidable",
+      "backgroundImage": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1920",
+      "ctaText": "Comprar Entradas",
+      "ctaLink": "#pricing-1",
+      "layout": "centered",
+      "overlay": true
+    },
+    "about-1": {
+      "title": "El Festival Más Grande del Año",
+      "content": "<p>Prepárate para vivir la experiencia musical más increíble del año. Tres días de música en vivo con los mejores artistas nacionales e internacionales.</p><h3>Lo que te espera</h3><ul><li>30+ artistas en vivo</li><li>5 escenarios simultáneos</li><li>Food trucks y gastronomía</li><li>Zona de camping</li><li>Actividades y experiencias únicas</li></ul>",
+      "image": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800",
+      "imagePosition": "left"
+    },
+    "schedule-1": {
+      "title": "Line-Up",
+      "layout": "list",
+      "events": [
+        {
+          "id": "day1-1",
+          "time": "18:00",
+          "title": "The Electric Waves",
+          "description": "Rock alternativo",
+          "location": "Escenario Principal"
+        },
+        {
+          "id": "day1-2",
+          "time": "20:00",
+          "title": "Luna & The Dreamers",
+          "description": "Indie pop",
+          "location": "Escenario Principal"
+        },
+        {
+          "id": "day1-3",
+          "time": "22:00",
+          "title": "DJ Cosmos",
+          "description": "Electronic dance",
+          "location": "Escenario Electrónico"
+        },
+        {
+          "id": "day1-4",
+          "time": "00:00",
+          "title": "The Midnight Riders",
+          "description": "Rock clásico - Headliner",
+          "location": "Escenario Principal"
+        }
+      ]
+    },
+    "pricing-1": {
+      "title": "Entradas",
+      "description": "Elige tu pase y prepárate para la experiencia",
+      "tickets": [
+        {
+          "id": "day-pass",
+          "name": "Pase de 1 Día",
+          "price": 80,
+          "currency": "$",
+          "description": "Acceso por un día",
+          "features": [
+            "Acceso a todos los escenarios",
+            "Re-entrada el mismo día"
+          ],
+          "available": true
+        },
+        {
+          "id": "weekend-pass",
+          "name": "Pase 3 Días",
+          "price": 200,
+          "currency": "$",
+          "description": "Acceso completo",
+          "features": [
+            "Acceso los 3 días",
+            "Descuento en merchandising",
+            "Pulsera conmemorativa"
+          ],
+          "available": true
+        },
+        {
+          "id": "vip-pass",
+          "name": "VIP 3 Días",
+          "price": 400,
+          "currency": "$",
+          "description": "Experiencia premium",
+          "features": [
+            "Todo lo anterior",
+            "Área VIP con baños privados",
+            "Barra libre",
+            "Acceso backstage limitado"
+          ],
+          "available": true
+        },
+        {
+          "id": "camping",
+          "name": "Camping",
+          "price": 50,
+          "currency": "$",
+          "description": "Zona de acampada",
+          "features": [
+            "Espacio para tienda",
+            "Acceso a duchas",
+            "Seguridad 24/7"
+          ],
+          "available": true
+        }
+      ],
+      "columns": 4
+    },
+    "gallery-1": {
+      "title": "Revive Ediciones Anteriores",
+      "layout": "masonry",
+      "columns": 3,
+      "images": [
+        {
+          "id": "img1",
+          "url": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600",
+          "alt": "Concierto 2024",
+          "caption": "Festival 2024"
+        },
+        {
+          "id": "img2",
+          "url": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600",
+          "alt": "Multitud",
+          "caption": "Más de 50,000 personas"
+        },
+        {
+          "id": "img3",
+          "url": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600",
+          "alt": "Escenario",
+          "caption": "Escenario principal"
+        },
+        {
+          "id": "img4",
+          "url": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600",
+          "alt": "Ambiente",
+          "caption": "Ambiente único"
+        },
+        {
+          "id": "img5",
+          "url": "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600",
+          "alt": "Puesta de sol",
+          "caption": "Atardecer mágico"
+        }
+      ]
+    },
+    "contact-1": {
+      "title": "Información",
+      "email": "info@festival2025.com",
+      "phone": "+1 555 MUSIC 00",
+      "address": "Parque Central, Ciudad",
+      "mapUrl": "",
+      "socialLinks": [
+        {
+          "platform": "Instagram",
+          "url": "https://instagram.com"
+        },
+        {
+          "platform": "Facebook",
+          "url": "https://facebook.com"
+        },
+        {
+          "platform": "Twitter",
+          "url": "https://twitter.com"
+        },
+        {
+          "platform": "Spotify",
+          "url": "https://spotify.com"
+        }
+      ]
+    }
+  }
+}

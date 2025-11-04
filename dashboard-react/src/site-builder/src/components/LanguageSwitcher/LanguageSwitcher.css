@@ -1,0 +1,63 @@
+.language-switcher {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.lang-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+}
+
+.lang-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.lang-button.active {
+  background: #fff;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.lang-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.lang-code {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .language-switcher {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-button {
+    color: #aaa;
+  }
+
+  .lang-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-button.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+}

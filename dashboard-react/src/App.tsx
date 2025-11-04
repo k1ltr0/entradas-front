@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Dashboard from './components/Dashboard';
 import Events from './components/Events';
 import Login from './components/Login';
+import SiteBuilderWrapper from './components/SiteBuilderWrapper';
 import './App.css';
 
 interface ProtectedRouteProps {
@@ -34,6 +35,11 @@ const App: React.FC = () => {
           <Route path="/events" element={
             <ProtectedRoute>
               <Events />
+            </ProtectedRoute>
+          } />
+          <Route path="/site-builder" element={
+            <ProtectedRoute>
+              <SiteBuilderWrapper />
             </ProtectedRoute>
           } />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />

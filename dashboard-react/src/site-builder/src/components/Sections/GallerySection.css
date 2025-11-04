@@ -1,0 +1,117 @@
+.gallery-section {
+  padding: 4rem 2rem;
+  background-color: #fafafa;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.gallery-grid,
+.gallery-masonry,
+.gallery-carousel {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.gallery-grid.gallery-columns-2 {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.gallery-grid.gallery-columns-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.gallery-grid.gallery-columns-4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.gallery-masonry {
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+
+.gallery-masonry.gallery-columns-2 {
+  column-count: 2;
+}
+
+.gallery-masonry.gallery-columns-4 {
+  column-count: 4;
+}
+
+.gallery-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.gallery-carousel .gallery-item {
+  flex: 0 0 80%;
+  scroll-snap-align: start;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-masonry .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.gallery-caption {
+  padding: 1rem;
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid.gallery-columns-2,
+  .gallery-grid.gallery-columns-3,
+  .gallery-grid.gallery-columns-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-masonry,
+  .gallery-masonry.gallery-columns-2,
+  .gallery-masonry.gallery-columns-4 {
+    column-count: 1;
+  }
+
+  .gallery-carousel .gallery-item {
+    flex: 0 0 90%;
+  }
+}

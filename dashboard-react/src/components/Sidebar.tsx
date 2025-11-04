@@ -10,6 +10,8 @@ const Sidebar: React.FC = () => {
       navigate('/dashboard');
     } else if (section === 'events') {
       navigate('/events');
+    } else if (section === 'site-builder') {
+      navigate('/site-builder');
     } else if (section === 'disabled') {
       // Do nothing for disabled items
       return;
@@ -72,6 +74,13 @@ const Sidebar: React.FC = () => {
           >
             <span className="nav-icon">📅</span>
             <span>Events</span>
+          </div>
+          <div
+            className={`nav-item ${location.pathname === '/site-builder' ? 'active' : ''}`}
+            onClick={() => handleNavClick('site-builder')}
+          >
+            <span className="nav-icon">🎨</span>
+            <span>Site Builder</span>
           </div>
           <div
             className="nav-item disabled"
