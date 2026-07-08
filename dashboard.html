@@ -529,6 +529,19 @@
             color: var(--shopify-text-secondary);
         }
 
+        .badge-edition {
+            background: #EAF1FB;
+            color: var(--shopify-green);
+            border: 1px solid #D3E2F6;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .badge-edition.past {
+            background: var(--shopify-badge-gray);
+            color: var(--shopify-text-secondary);
+            border-color: var(--shopify-border);
+        }
+
         /* Loading State */
         .loading {
             display: flex;
@@ -836,6 +849,15 @@
                                 <option value="2000">2000m</option>
                             </select>
                         </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Edición:</label>
+                            <select class="filter-select" id="editionFilter" onchange="applyFilters()">
+                                <option value="">Todas</option>
+                                <option value="2026">2026</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div id="ticketsContent">
@@ -983,6 +1005,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Edición</th>
                             <th class="sortable-header" onclick="sortTable('name')">
                                 Customer
                                 <span class="sort-indicator ${currentSort.field === 'name' ? 'active' : ''}">${getSortIcon('name')}</span>
@@ -1017,6 +1040,7 @@
                         ${filteredTickets.map(ticket => `
                             <tr onclick="window.location.href='ticket-detail.html?id=${ticket.id || 0}'" style="cursor: pointer;">
                                 <td><strong>#${ticket.id ? String(ticket.id).substring(0, 8) : 'N/A'}</strong></td>
+                                <td>${getEditionBadge(ticket)}</td>
                                 <td>${ticket.name || 'N/A'}</td>
                                 <td>${ticket.email || 'N/A'}</td>
                                 <td>${ticket.category || 'N/A'}</td>
@@ -1064,16 +1088,35 @@
             }
         }
 
+        // Edición del evento: se deriva del año de la fecha de compra
+        // (cada edición tiene su propia ventana de inscripción anual).
+        const CURRENT_EDITION = 2026;
+
+        function getEdition(ticket) {
+            if (!ticket.purchase_date) return null;
+            const d = new Date(ticket.purchase_date);
+            return isNaN(d) ? null : d.getFullYear();
+        }
+
+        function getEditionBadge(ticket) {
+            const year = getEdition(ticket);
+            if (!year) return '<span class="badge badge-neutral">—</span>';
+            const cls = year >= CURRENT_EDITION ? '' : ' past';
+            return `<span class="badge badge-edition${cls}">${year}</span>`;
+        }
+
         function applyFilters() {
             const statusFilter = document.getElementById('statusFilter').value;
             const categoryFilter = document.getElementById('categoryFilter').value;
             const distanceFilter = document.getElementById('distanceFilter').value;
+            const editionFilter = document.getElementById('editionFilter') ? document.getElementById('editionFilter').value : '';
 
             filteredTickets = allTickets.filter(ticket => {
                 const statusMatch = !statusFilter || ticket.status === statusFilter || ticket.payment_status === statusFilter;
                 const categoryMatch = !categoryFilter || ticket.category === categoryFilter;
                 const distanceMatch = !distanceFilter || ticket.distance == distanceFilter;
-                return statusMatch && categoryMatch && distanceMatch;
+                const editionMatch = !editionFilter || String(getEdition(ticket)) === editionFilter;
+                return statusMatch && categoryMatch && distanceMatch && editionMatch;
             });
 
             applySorting();
@@ -1164,6 +1207,7 @@
                 // Prepare data for Excel
                 const excelData = ticketsToExport.map(ticket => ({
                     'Ticket ID': ticket.id || 'N/A',
+                    'Edición': getEdition(ticket) || 'N/A',
                     'Customer Name': ticket.name || 'N/A',
                     'Email': ticket.email || 'N/A',
                     'Phone': ticket.phone || 'N/A',
