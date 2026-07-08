@@ -13,19 +13,20 @@
         }
 
         :root {
-            --shopify-bg: #F6F6F7;
-            --shopify-sidebar: #1A1C23;
-            --shopify-text: #202223;
-            --shopify-text-secondary: #6D7175;
-            --shopify-green: #008060;
-            --shopify-blue: #006FBB;
-            --shopify-border: #E1E3E5;
+            --shopify-bg: #F6F8FA;
+            --shopify-sidebar: #0B1B2B;
+            --shopify-text: #0B1B2B;
+            --shopify-text-secondary: #3A4A5A;
+            --shopify-green: #003F91;
+            --shopify-green-hover: #00306f;
+            --shopify-blue: #003F91;
+            --shopify-border: #E3E8EE;
             --shopify-white: #FFFFFF;
-            --shopify-hover: #F7F8FA;
-            --shopify-success: #008060;
-            --shopify-warning: #F1A817;
-            --shopify-error: #D72C0D;
-            --shopify-info: #006FBB;
+            --shopify-hover: #F6F8FA;
+            --shopify-success: #2E7D46;
+            --shopify-warning: #B7791F;
+            --shopify-error: #C0392B;
+            --shopify-info: #5DA9E9;
             --shopify-badge-green: #E3F1DF;
             --shopify-badge-yellow: #FFF5EA;
             --shopify-badge-red: #FFF4F4;
@@ -313,8 +314,8 @@
         }
 
         .btn-primary:hover {
-            background: #006e52;
-            box-shadow: 0 2px 4px rgba(0, 128, 96, 0.2);
+            background: var(--shopify-green-hover);
+            box-shadow: 0 2px 4px rgba(0, 63, 145, 0.2);
         }
 
         .btn-secondary {
@@ -644,7 +645,7 @@
         .form-input:focus {
             outline: none;
             border-color: var(--shopify-green);
-            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 63, 145, 0.1);
         }
 
         .form-help {
@@ -989,6 +990,43 @@
                 text-align: left;
             }
         }
+
+        /* Icons (Lucide — monochrome, inherit currentColor) */
+        .lucide {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .nav-icon .lucide {
+            width: 18px;
+            height: 18px;
+        }
+
+        .icon-button .lucide {
+            width: 18px;
+            height: 18px;
+        }
+
+        .card-title .lucide,
+        .notes-title .lucide,
+        .btn .lucide {
+            width: 16px;
+            height: 16px;
+        }
+
+        .modal-title .lucide {
+            width: 18px;
+            height: 18px;
+        }
+
+        .error-icon .lucide {
+            width: 28px;
+            height: 28px;
+        }
     </style>
 </head>
 <body>
@@ -1007,22 +1045,22 @@
 
             <nav class="nav-menu">
                 <div class="nav-item" onclick="window.location.href='dashboard.html'">
-                    <span class="nav-icon">🏠</span>
+                    <span class="nav-icon"><i data-lucide="house"></i></span>
                     <span>Home</span>
                 </div>
 
                 <div class="nav-section">
                     <div class="nav-section-title">Sales</div>
                     <div class="nav-item active">
-                        <span class="nav-icon">🎫</span>
+                        <span class="nav-icon"><i data-lucide="ticket"></i></span>
                         <span>Tickets</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">📊</span>
+                        <span class="nav-icon"><i data-lucide="chart-column"></i></span>
                         <span>Analytics</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">👥</span>
+                        <span class="nav-icon"><i data-lucide="users"></i></span>
                         <span>Customers</span>
                     </div>
                 </div>
@@ -1030,15 +1068,15 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Content</div>
                     <div class="nav-item">
-                        <span class="nav-icon">📅</span>
+                        <span class="nav-icon"><i data-lucide="calendar"></i></span>
                         <span>Events</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">📢</span>
+                        <span class="nav-icon"><i data-lucide="megaphone"></i></span>
                         <span>Marketing</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">💸</span>
+                        <span class="nav-icon"><i data-lucide="banknote"></i></span>
                         <span>Discounts</span>
                     </div>
                 </div>
@@ -1046,15 +1084,15 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Settings</div>
                     <div class="nav-item">
-                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-icon"><i data-lucide="settings"></i></span>
                         <span>General</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">💳</span>
+                        <span class="nav-icon"><i data-lucide="credit-card"></i></span>
                         <span>Payments</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">🔔</span>
+                        <span class="nav-icon"><i data-lucide="bell"></i></span>
                         <span>Notifications</span>
                     </div>
                 </div>
@@ -1075,10 +1113,10 @@
 
                 <div class="top-bar-actions">
                     <button class="icon-button">
-                        <span>🔔</span>
+                        <span><i data-lucide="bell"></i></span>
                     </button>
                     <button class="icon-button">
-                        <span>❓</span>
+                        <span><i data-lucide="circle-help"></i></span>
                     </button>
                     <div class="user-menu" onclick="logout()">
                         <div class="user-avatar">A</div>
@@ -1095,10 +1133,10 @@
                 </div>
 
                 <div id="errorContent" class="error-state" style="display: none;">
-                    <div class="error-icon">⚠️</div>
+                    <div class="error-icon"><i data-lucide="triangle-alert"></i></div>
                     <h3 class="error-title">Ticket not found</h3>
                     <p class="error-description">The ticket you're looking for doesn't exist or may have been deleted.</p>
-                    <a href="dashboard.html" class="btn btn-primary" style="margin-top: 16px;">← Back to Dashboard</a>
+                    <a href="dashboard.html" class="btn btn-primary" style="margin-top: 16px;"><i data-lucide="arrow-left"></i> Back to Dashboard</a>
                 </div>
 
                 <div id="ticketContent" style="display: none;">
@@ -1116,13 +1154,13 @@
                         </div>
                         <div class="page-actions">
                             <button class="btn btn-primary" onclick="showResendEmailModal()">
-                                <span>📧</span> Resend Email
+                                <span><i data-lucide="mail"></i></span> Resend Email
                             </button>
                             <button class="btn btn-secondary" onclick="window.print()">
-                                <span>🖨️</span> Print
+                                <span><i data-lucide="printer"></i></span> Print
                             </button>
                             <a href="dashboard.html" class="btn btn-secondary">
-                                <span>←</span> Back
+                                <span><i data-lucide="arrow-left"></i></span> Back
                             </a>
                         </div>
                     </div>
@@ -1133,7 +1171,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h2 class="card-title">
-                                        <span>👤</span> Customer Information
+                                        <span><i data-lucide="user"></i></span> Customer Information
                                     </h2>
                                 </div>
                                 <div class="card-body">
@@ -1147,7 +1185,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h2 class="card-title">
-                                        <span>🏊</span> Event Information
+                                        <span><i data-lucide="waves"></i></span> Event Information
                                     </h2>
                                 </div>
                                 <div class="card-body">
@@ -1163,7 +1201,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h2 class="card-title">
-                                        <span>💳</span> Payment
+                                        <span><i data-lucide="credit-card"></i></span> Payment
                                     </h2>
                                 </div>
                                 <div class="card-body">
@@ -1177,7 +1215,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h2 class="card-title">
-                                        <span>📅</span> Timeline
+                                        <span><i data-lucide="calendar"></i></span> Timeline
                                     </h2>
                                 </div>
                                 <div class="card-body">
@@ -1192,7 +1230,7 @@
                     <!-- Notes Section (conditional) -->
                     <div id="notesSection" class="notes-section" style="display: none;">
                         <div class="notes-title">
-                            <span>📝</span> Additional Notes
+                            <span><i data-lucide="file-text"></i></span> Additional Notes
                         </div>
                         <div class="notes-content" id="notesContent">
                             <!-- Will be populated by JavaScript -->
@@ -1215,7 +1253,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">
-                    <span>📧</span> Resend Ticket Email
+                    <span><i data-lucide="mail"></i></span> Resend Ticket Email
                 </h2>
                 <button type="button" class="modal-close" onclick="hideResendEmailModal()">
                     ×
@@ -1250,7 +1288,11 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        // Render Lucide icons on initial load
+        if (window.lucide) lucide.createIcons();
+
         let ticket = null;
 
         // Get ticket ID from URL parameters
@@ -1297,7 +1339,7 @@
             const tokenType = localStorage.getItem('tokenType') || 'bearer';
 
             try {
-                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
+                const response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/tickets', {
                     method: 'GET',
                     headers: {
                         'Authorization': `${tokenType} ${token}`,
@@ -1439,6 +1481,9 @@
                 document.getElementById('notesSection').style.display = 'block';
                 document.getElementById('notesContent').textContent = ticket.notes;
             }
+
+            // Re-render any Lucide icons inserted via innerHTML
+            if (window.lucide) lucide.createIcons();
         }
 
         // Show error state
@@ -1546,7 +1591,7 @@
                     custom_email: email !== ticket.email ? email : null
                 };
 
-                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets/resend-email', {
+                const response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/tickets/resend-email', {
                     method: 'POST',
                     headers: {
                         'Authorization': `${tokenType} ${token}`,

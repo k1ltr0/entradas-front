@@ -15,19 +15,20 @@
         }
 
         :root {
-            --shopify-bg: #F6F6F7;
-            --shopify-sidebar: #1A1C23;
-            --shopify-text: #202223;
-            --shopify-text-secondary: #6D7175;
-            --shopify-green: #008060;
-            --shopify-blue: #006FBB;
-            --shopify-border: #E1E3E5;
+            --shopify-bg: #F6F8FA;
+            --shopify-sidebar: #0B1B2B;
+            --shopify-text: #0B1B2B;
+            --shopify-text-secondary: #3A4A5A;
+            --shopify-green: #003F91;
+            --shopify-green-hover: #00306f;
+            --shopify-blue: #003F91;
+            --shopify-border: #E3E8EE;
             --shopify-white: #FFFFFF;
-            --shopify-hover: #F7F8FA;
-            --shopify-success: #008060;
-            --shopify-warning: #F1A817;
-            --shopify-error: #D72C0D;
-            --shopify-info: #006FBB;
+            --shopify-hover: #F6F8FA;
+            --shopify-success: #2E7D46;
+            --shopify-warning: #B7791F;
+            --shopify-error: #C0392B;
+            --shopify-info: #5DA9E9;
             --shopify-badge-green: #E3F1DF;
             --shopify-badge-yellow: #FFF5EA;
             --shopify-badge-red: #FFF4F4;
@@ -192,7 +193,7 @@
             outline: none;
             border-color: var(--shopify-green);
             background: var(--shopify-white);
-            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 63, 145, 0.1);
         }
 
         .top-bar-actions {
@@ -379,8 +380,8 @@
         }
 
         .btn-primary:hover {
-            background: #006e52;
-            box-shadow: 0 2px 4px rgba(0, 128, 96, 0.2);
+            background: var(--shopify-green-hover);
+            box-shadow: 0 2px 4px rgba(0, 63, 145, 0.2);
         }
 
         .btn-secondary {
@@ -434,7 +435,7 @@
         .filter-select:focus {
             outline: none;
             border-color: var(--shopify-green);
-            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 63, 145, 0.1);
         }
 
         /* Table */
@@ -589,6 +590,46 @@
 
 
 
+        /* Icons (Lucide — monochrome, inherit currentColor) */
+        .lucide {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .nav-item .lucide {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn .lucide {
+            width: 16px;
+            height: 16px;
+        }
+
+        .badge .lucide {
+            width: 14px;
+            height: 14px;
+        }
+
+        .stat-change .lucide {
+            width: 14px;
+            height: 14px;
+        }
+
+        .sort-indicator .lucide {
+            width: 12px;
+            height: 12px;
+        }
+
+        .empty-icon .lucide {
+            width: 28px;
+            height: 28px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -628,22 +669,22 @@
 
             <nav class="nav-menu">
                 <div class="nav-item active" onclick="showSection('home')">
-                    <span class="nav-icon">🏠</span>
+                    <span class="nav-icon"><i data-lucide="house"></i></span>
                     <span>Home</span>
                 </div>
 
                 <div class="nav-section">
                     <div class="nav-section-title">Sales</div>
                     <div class="nav-item" onclick="showSection('tickets')">
-                        <span class="nav-icon">🎫</span>
+                        <span class="nav-icon"><i data-lucide="ticket"></i></span>
                         <span>Tickets</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">📊</span>
+                        <span class="nav-icon"><i data-lucide="chart-column"></i></span>
                         <span>Analytics</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">👥</span>
+                        <span class="nav-icon"><i data-lucide="users"></i></span>
                         <span>Customers</span>
                     </div>
                 </div>
@@ -651,15 +692,15 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Content</div>
                     <div class="nav-item">
-                        <span class="nav-icon">📅</span>
+                        <span class="nav-icon"><i data-lucide="calendar"></i></span>
                         <span>Events</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">📢</span>
+                        <span class="nav-icon"><i data-lucide="megaphone"></i></span>
                         <span>Marketing</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">💸</span>
+                        <span class="nav-icon"><i data-lucide="banknote"></i></span>
                         <span>Discounts</span>
                     </div>
                 </div>
@@ -667,15 +708,15 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Settings</div>
                     <div class="nav-item">
-                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-icon"><i data-lucide="settings"></i></span>
                         <span>General</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">💳</span>
+                        <span class="nav-icon"><i data-lucide="credit-card"></i></span>
                         <span>Payments</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">🔔</span>
+                        <span class="nav-icon"><i data-lucide="bell"></i></span>
                         <span>Notifications</span>
                     </div>
                 </div>
@@ -687,7 +728,7 @@
             <!-- Top Bar -->
             <header class="top-bar">
                 <button class="icon-button mobile-menu">
-                    <span>☰</span>
+                    <span><i data-lucide="menu"></i></span>
                 </button>
 
                 <div class="search-bar">
@@ -696,10 +737,10 @@
 
                 <div class="top-bar-actions">
                     <button class="icon-button">
-                        <span>🔔</span>
+                        <span><i data-lucide="bell"></i></span>
                     </button>
                     <button class="icon-button">
-                        <span>❓</span>
+                        <span><i data-lucide="circle-help"></i></span>
                     </button>
                     <div class="user-menu" onclick="logout()">
                         <div class="user-avatar">A</div>
@@ -720,7 +761,7 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Total Sales</span>
-                            <span class="stat-change positive">↑ 12.5%</span>
+                            <span class="stat-change positive"><i data-lucide="trending-up"></i> 12.5%</span>
                         </div>
                         <div class="stat-value" id="totalRevenue">$0</div>
                         <div class="stat-comparison">vs. last period</div>
@@ -729,7 +770,7 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Total Tickets</span>
-                            <span class="stat-change positive">↑ 8.3%</span>
+                            <span class="stat-change positive"><i data-lucide="trending-up"></i> 8.3%</span>
                         </div>
                         <div class="stat-value" id="totalTickets">0</div>
                         <div class="stat-comparison">all time</div>
@@ -738,7 +779,7 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Paid Tickets</span>
-                            <span class="stat-change positive">↑ 15.2%</span>
+                            <span class="stat-change positive"><i data-lucide="trending-up"></i> 15.2%</span>
                         </div>
                         <div class="stat-value" id="paidTickets">0</div>
                         <div class="stat-comparison">successfully processed</div>
@@ -747,7 +788,7 @@
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Pending</span>
-                            <span class="stat-change negative">↓ 3.1%</span>
+                            <span class="stat-change negative"><i data-lucide="trending-down"></i> 3.1%</span>
                         </div>
                         <div class="stat-value" id="pendingTickets">0</div>
                         <div class="stat-comparison">awaiting payment</div>
@@ -760,10 +801,10 @@
                         <h2 class="data-card-title">Recent Tickets</h2>
                         <div class="data-card-actions">
                             <button class="btn btn-secondary" onclick="exportData()">
-                                <span>↓</span> Export
+                                <i data-lucide="download"></i> Export
                             </button>
                             <button class="btn btn-primary" onclick="loadTickets()">
-                                <span>↻</span> Refresh
+                                <i data-lucide="refresh-cw"></i> Refresh
                             </button>
                         </div>
                     </div>
@@ -809,13 +850,18 @@
     </div>
 
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        // Render Lucide icons present in the static markup
+        if (window.lucide) lucide.createIcons();
+
         let allTickets = [];
         let filteredTickets = [];
         let currentSort = { field: 'purchase_date', direction: 'desc' };
 
         // Check authentication on page load
         window.addEventListener('DOMContentLoaded', function() {
+            if (window.lucide) lucide.createIcons();
             const token = localStorage.getItem('authToken');
             const tokenExpiry = localStorage.getItem('tokenExpiry');
 
@@ -840,7 +886,7 @@
             `;
 
             try {
-                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
+                const response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/tickets', {
                     method: 'GET',
                     headers: {
                         'Authorization': `${tokenType} ${token}`,
@@ -878,12 +924,13 @@
                 console.error('Error loading tickets:', error);
                 ticketsContent.innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-icon">⚠️</div>
+                        <div class="empty-icon"><i data-lucide="triangle-alert"></i></div>
                         <h3 class="empty-title">Failed to load tickets</h3>
                         <p class="empty-description">Please try again or contact support if the problem persists.</p>
                         <button class="btn btn-primary" onclick="loadTickets()" style="margin-top: 16px;">Try Again</button>
                     </div>
                 `;
+                if (window.lucide) lucide.createIcons();
             }
         }
 
@@ -920,13 +967,14 @@
             if (filteredTickets.length === 0) {
                 ticketsContent.innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-icon">🎫</div>
+                        <div class="empty-icon"><i data-lucide="ticket"></i></div>
                         <h3 class="empty-title">No tickets found</h3>
                         <p class="empty-description">
                             ${allTickets.length === 0 ? 'No tickets have been created yet.' : 'Try adjusting your filters to see more results.'}
                         </p>
                     </div>
                 `;
+                if (window.lucide) lucide.createIcons();
                 return;
             }
 
@@ -983,6 +1031,7 @@
             `;
 
             ticketsContent.innerHTML = tableHTML;
+            if (window.lucide) lucide.createIcons();
         }
 
         function getBadgeHTML(status) {
@@ -1082,8 +1131,8 @@
         }
 
         function getSortIcon(field) {
-            if (currentSort.field !== field) return '↕';
-            return currentSort.direction === 'asc' ? '↑' : '↓';
+            if (currentSort.field !== field) return '<i data-lucide="chevrons-up-down"></i>';
+            return currentSort.direction === 'asc' ? '<i data-lucide="trending-up"></i>' : '<i data-lucide="trending-down"></i>';
         }
 
 
@@ -1166,11 +1215,13 @@
                 // Optional: show a temporary success message instead of console.log
                 const exportBtn = document.querySelector('.btn-secondary');
                 const originalText = exportBtn.innerHTML;
-                exportBtn.innerHTML = '<span>✓</span> Exported!';
+                exportBtn.innerHTML = '<i data-lucide="check"></i> Exported!';
+                if (window.lucide) lucide.createIcons();
                 exportBtn.style.background = 'var(--shopify-success)';
                 exportBtn.style.color = 'white';
                 setTimeout(() => {
                     exportBtn.innerHTML = originalText;
+                    if (window.lucide) lucide.createIcons();
                     exportBtn.style.background = '';
                     exportBtn.style.color = '';
                 }, 2000);

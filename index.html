@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8ª edición de Aguas Abiertas Chile 2025</title>
+    <title>9ª edición de Aguas Abiertas Chile 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --navy: #0B1B2B;
+            --blue: #003F91;
+            --blue-dark: #00306f;
+            --blue-light: #5DA9E9;
+            --slate: #3A4A5A;
+            --muted: #8A99A8;
+            --bg: #FFFFFF;
+            --bg-soft: #F6F8FA;
+            --border: #E3E8EE;
+            --green-bg: #E5F4E3;
+            --green: #2E7D46;
+            --red: #C0392B;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +30,8 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--slate);
+            background: var(--bg);
             min-height: 100vh;
         }
 
@@ -26,12 +41,23 @@
             padding: 0 20px;
         }
 
+        /* Icons (Lucide — monochrome, inherit currentColor) */
+        .lucide {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
         /* Header/Banner */
         .banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 0;
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+            padding: 64px 0;
             text-align: center;
-            color: white;
+            color: var(--navy);
             position: relative;
             overflow: hidden;
         }
@@ -43,7 +69,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.5;
+            -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 70%);
+            mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -53,33 +85,34 @@
         }
 
         .banner img {
-            max-width: 120px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            max-width: 110px;
+            margin-bottom: 24px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(11, 27, 43, 0.08);
         }
 
         .banner h1 {
             font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            color: var(--navy);
         }
 
         .banner p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: 1.15rem;
+            color: var(--slate);
+            font-weight: 400;
+            max-width: 620px;
+            margin: 0 auto;
         }
 
         /* Main Content */
         .main-content {
-            background: white;
-            border-radius: 20px 20px 0 0;
-            margin-top: -20px;
+            background: var(--bg);
             position: relative;
             z-index: 3;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
         }
 
         .content-container {
@@ -95,32 +128,29 @@
         }
 
         .event-details h2 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #2d3748;
+            letter-spacing: -0.02em;
+            color: var(--navy);
             margin-bottom: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .event-info {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-soft);
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
             margin-bottom: 30px;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: white;
+            margin-bottom: 14px;
+            padding: 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .info-item:last-child {
@@ -130,24 +160,26 @@
         .info-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #EAF1FB;
+            border: 1px solid #D3E2F6;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            color: white;
+            color: var(--blue);
             font-weight: 600;
+            flex-shrink: 0;
         }
 
         .info-content h4 {
             font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 5px;
+            color: var(--navy);
+            margin-bottom: 4px;
         }
 
         .info-content p {
-            color: #718096;
+            color: var(--muted);
             font-size: 0.95rem;
         }
 
@@ -158,28 +190,29 @@
 
         .features-list li {
             padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
+            color: var(--slate);
         }
 
         .features-list li:last-child {
             border-bottom: none;
         }
 
-        .features-list li::before {
-            content: '✓';
-            color: #48bb78;
-            font-weight: bold;
+        .features-list li .lucide {
+            color: var(--green);
             margin-right: 12px;
-            font-size: 1.2rem;
+            width: 18px;
+            height: 18px;
         }
 
         /* Gallery Section */
         .gallery-section h3 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #2d3748;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--navy);
             margin-bottom: 30px;
             text-align: center;
         }
@@ -192,17 +225,18 @@
 
         .gallery-item {
             position: relative;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(11, 27, 43, 0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             cursor: pointer;
-            background: white;
+            background: var(--bg);
         }
 
         .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(11, 27, 43, 0.12);
         }
 
         .gallery-item img,
@@ -222,30 +256,46 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--blue);
             color: white;
-            padding: 10px 16px;
-            border-radius: 25px;
+            padding: 9px 16px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
+            letter-spacing: 0.03em;
             pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0, 63, 145, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-overlay .lucide {
+            width: 14px;
+            height: 14px;
+        }
+
+        button .lucide {
+            width: 18px;
+            height: 18px;
+            margin-right: 2px;
         }
 
         /* Ticket Form */
         .ticket-form {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--blue);
             padding: 50px 40px;
-            border-radius: 20px;
+            border-radius: 16px;
             color: white;
             margin: 40px 0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 45px rgba(0, 63, 145, 0.25);
         }
 
         .ticket-form h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 30px;
+            letter-spacing: -0.01em;
+            margin-bottom: 28px;
             text-align: center;
         }
 
@@ -273,14 +323,13 @@
 
         input, select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.1);
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.08);
             color: white;
             font-size: 16px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
 
         input::placeholder {
@@ -289,9 +338,8 @@
 
         input:focus, select:focus {
             outline: none;
-            border-color: rgba(255,255,255,0.5);
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+            border-color: var(--blue-light);
+            background: rgba(255,255,255,0.14);
         }
 
         select {
@@ -303,34 +351,36 @@
         }
 
         button {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            padding: 18px 40px;
+            background: #ffffff;
+            color: var(--blue);
+            padding: 16px 40px;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
             width: 100%;
             margin-top: 20px;
         }
 
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(72, 187, 120, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
         }
 
         button:disabled {
             transform: none;
-            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.2);
+            background: rgba(255,255,255,0.55);
+            color: var(--blue-dark);
+            box-shadow: none;
             cursor: not-allowed;
         }
 
         button:disabled:hover {
             transform: none;
-            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.2);
+            box-shadow: none;
         }
 
         /* Modal */
@@ -474,27 +524,29 @@
             margin-top: 20px;
         }
         .price-card {
-            background: linear-gradient(135deg, #f7fafc 0%, #e9d8fd 100%);
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(118, 75, 162, 0.08);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(11, 27, 43, 0.05);
             padding: 32px 20px;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
         .price-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(118, 75, 162, 0.15);
+            transform: translateY(-4px);
+            border-color: var(--blue-light);
+            box-shadow: 0 10px 26px rgba(11, 27, 43, 0.1);
         }
         .price-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: #5a189a;
+            color: var(--slate);
             margin-bottom: 10px;
         }
         .price-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #764ba2;
+            color: var(--blue);
         }
         .price-card.agotada {
             opacity: 0.5;
@@ -502,29 +554,231 @@
         }
         .agotada-label {
             position: absolute;
-            top: 18px;
-            right: 18px;
-            background: #e53e3e;
+            top: 16px;
+            right: 16px;
+            background: var(--red);
             color: white;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(229,62,62,0.15);
-            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .status-label {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .status-label.activa {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+        .status-label.proxima {
+            background: #EAF1FB;
+            color: var(--blue);
+        }
+        .price-card.destacada {
+            border-color: var(--blue);
+            box-shadow: 0 6px 20px rgba(0, 63, 145, 0.12);
+        }
+        .price-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* Galería edición anterior (Flickr) */
+        .past-gallery {
+            margin: 10px 0 50px;
+        }
+        .past-gallery h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .past-gallery .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+        .past-gallery .gallery-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+        .past-gallery .gallery-item {
+            display: block;
+        }
+        .gallery-cta {
+            text-align: center;
+            margin-top: 28px;
+        }
+        .gallery-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 13px 26px;
+            border-radius: 10px;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .gallery-cta a:hover {
+            transform: translateY(-2px);
+            background: var(--blue-dark);
+        }
+        .gallery-cta .lucide {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Descarga de resultados */
+        .results-section {
+            margin: 10px 0 50px;
+        }
+        .download-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 28px;
+        }
+        .download-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            background: #EAF1FB;
+            border: 1px solid #D3E2F6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+        }
+        .download-icon .lucide {
+            width: 26px;
+            height: 26px;
+        }
+        .download-info {
+            flex: 1;
+        }
+        .download-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        .download-info p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 13px 24px;
+            border-radius: 10px;
+            white-space: nowrap;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            background: var(--blue-dark);
+        }
+        .download-btn .lucide {
+            width: 18px;
+            height: 18px;
+        }
+        @media (max-width: 600px) {
+            .download-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Cronograma */
+        .schedule-section {
+            margin: 10px 0 20px;
+        }
+        .schedule-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .schedule-section .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .schedule-table th {
+            background: var(--navy);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 14px 16px;
+            text-align: left;
+        }
+        .schedule-table td {
+            padding: 13px 16px;
+            border-top: 1px solid var(--border);
+            color: var(--slate);
+            font-size: 0.95rem;
+        }
+        .schedule-table tr:nth-child(even) td {
+            background: var(--bg-soft);
+        }
+        .schedule-time {
+            font-weight: 600;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+        .schedule-note {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 14px;
+            text-align: center;
         }
 
         select, select option {
-            color: #2d3748 !important;
+            color: var(--navy) !important;
             background: white !important;
         }
 
         input {
             background: white !important;
-            color: #2d3748 !important;
+            color: var(--navy) !important;
         }
         input::placeholder {
-            color: #718096 !important;
+            color: var(--muted) !important;
         }
     </style>
 </head>
@@ -533,7 +787,7 @@
         <div class="container">
             <div class="banner-content">
                 <img src="logo.jpg" alt="Logo del evento">
-                <h1>8ª edición de Aguas Abiertas Chile 2025</h1>
+                <h1>9ª edición de Aguas Abiertas Chile 2026</h1>
                 <p>¡Prepárate para vivir la emoción de las Aguas Abiertas en Chile!</p>
             </div>
         </div>
@@ -547,71 +801,83 @@
 
                     <div class="event-info">
                         <div class="info-item">
-                            <div class="info-icon">📅</div>
+                            <div class="info-icon"><i data-lucide="calendar"></i></div>
                             <div class="info-content">
                                 <h4>¿Cuándo?</h4>
-                                <p>25 de octubre de 2025</p>
+                                <p>Sábado 17 de octubre de 2026</p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <div class="info-icon">⏰</div>
+                            <div class="info-icon"><i data-lucide="clock"></i></div>
                             <div class="info-content">
                                 <h4>¿Desde qué hora?</h4>
-                                <p>07:00 AM</p>
+                                <p>07:30 AM (recepción de deportistas)</p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <div class="info-icon">📍</div>
+                            <div class="info-icon"><i data-lucide="map-pin"></i></div>
                             <div class="info-content">
                                 <h4>¿Dónde?</h4>
-                                <p>Laguna Miranda’s Ski-School, San Bernardo</p>
+                                <p>Lago Valle Maipo, San Bernardo, RM</p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <div class="info-icon">💰</div>
+                            <div class="info-icon"><i data-lucide="map"></i></div>
                             <div class="info-content">
                                 <h4>Ubicación</h4>
-                                <p>Camino Nos Los Morros #10, San Bernardo.</p>
+                                <p>Camino del Inca, Parcela #22, San Bernardo.</p>
                             </div>
                         </div>
                     </div>
 
-                    <h3 style="margin-bottom: 20px; color: #2d3748;">¿Qué incluye tu entrada?</h3>
+                    <h3 style="margin-bottom: 20px; color: #0B1B2B;">¿Qué incluye tu entrada?</h3>
                     <ul class="features-list">
-                        <li>Recorrido de la competencia boyado de 1.000 metros</li>
-                        <li>Kit de participante</li>
-                        <li>Equipo de salvavidas y personal médico capacitado.</li>
-                        <li>Hidratación durante el evento</li>
-                        <li>Medallas de Oro, Plata y Bronce a los tres primeros lugares de cada categoría y distancia</li>
-                        <li>Premio a mejor marca técnica dama y varón 2K</li>
-                        <li>Trofeo a los 3 equipos con mejor desempeño general (medallero)</li>
+                        <li><i data-lucide="check"></i>Recorrido de la competencia boyado de 1.000 metros</li>
+                        <li><i data-lucide="check"></i>Kit de participante</li>
+                        <li><i data-lucide="check"></i>Equipo de salvavidas y personal médico capacitado.</li>
+                        <li><i data-lucide="check"></i>Hidratación durante el evento</li>
+                        <li><i data-lucide="check"></i>Medallas de Oro, Plata y Bronce a los tres primeros lugares de cada categoría y distancia</li>
+                        <li><i data-lucide="check"></i>Premio a mejor marca técnica dama y varón 2K</li>
+                        <li><i data-lucide="check"></i>Trofeo a los 3 equipos con mejor desempeño general (medallero)</li>
                     </ul>
 
                     <!-- Sección de precios -->
                     <div class="prices-section" style="margin: 40px 0;">
-                        <h3 style="color: #2d3748; text-align: center; margin-bottom: 24px;">Valores de Inscripción</h3>
+                        <h3 style="color: #0B1B2B; text-align: center; margin-bottom: 6px;">Valores de Inscripción</h3>
+                        <p style="text-align: center; color: var(--muted); margin-bottom: 24px; font-size: 0.9rem;">Inscripciones abiertas del 26 de junio al 5 de octubre de 2026</p>
                         <div class="prices-grid">
-                            <div class="price-card agotada">
-                                <span class="agotada-label">FINALIZADA</span>
+                            <div class="price-card destacada">
+                                <span class="status-label activa">Disponible</span>
                                 <div class="price-title">Preventa Prueba Individual</div>
-                                <div class="price-value">$25.000.-</div>
-                            </div>
-                            <div class="price-card agotada">
-                                <span class="agotada-label">FINALIZADA</span>
-                                <div class="price-title">Preventa Prueba Relevo</div>
-                                <div class="price-value">$60.000.-</div>
-                            </div>
-                            <div class="price-card agotada">
-                                <span class="agotada-label">FINALIZADA</span>
-                                <div class="price-title">Venta General Prueba Individual</div>
                                 <div class="price-value">$35.000.-</div>
+                                <div class="price-note">Hasta el 6 de septiembre</div>
                             </div>
-                            <div class="price-card agotada">
-                                <span class="agotada-label">FINALIZADA</span>
+                            <div class="price-card destacada">
+                                <span class="status-label activa">Disponible</span>
+                                <div class="price-title">Preventa Prueba Relevo</div>
+                                <div class="price-value">$75.000.-</div>
+                                <div class="price-note">Hasta el 6 de septiembre</div>
+                            </div>
+                            <div class="price-card destacada">
+                                <span class="status-label activa">Disponible</span>
+                                <div class="price-title">Pack Individual + Relevo</div>
+                                <div class="price-value">$55.000.-</div>
+                                <div class="price-note">Incluye 1 nadador en la prueba de relevo*</div>
+                            </div>
+                            <div class="price-card">
+                                <span class="status-label proxima">Desde 7 sep</span>
+                                <div class="price-title">Venta General Prueba Individual</div>
+                                <div class="price-value">$45.000.-</div>
+                                <div class="price-note">Del 7 de septiembre al 5 de octubre</div>
+                            </div>
+                            <div class="price-card">
+                                <span class="status-label proxima">Desde 7 sep</span>
                                 <div class="price-title">Venta General Prueba Relevo</div>
                                 <div class="price-value">$90.000.-</div>
+                                <div class="price-note">Del 7 de septiembre al 5 de octubre</div>
                             </div>
                         </div>
+                        <p style="color: var(--muted); font-size: 0.8rem; margin-top: 16px;">*El pack incluye la inscripción de 1 nadador para la prueba de relevos. Para conformar el equipo deberás completar el relevo con otros dos nadadores inscritos con el mismo "nombre de equipo".</p>
                     </div>
                 </div>
 
@@ -638,22 +904,84 @@
                         </div>
                         <div class="gallery-item" onclick="openModal('gallery/WhatsApp Video 2025-05-22 at 08.36.11_b1a08203.mp4', 'video')">
                             <video src="gallery/WhatsApp Video 2025-05-22 at 08.36.11_b1a08203.mp4" muted></video>
-                            <div class="video-overlay">▶ VIDEO</div>
+                            <div class="video-overlay"><i data-lucide="play"></i>VIDEO</div>
                         </div>
                         <div class="gallery-item" onclick="openModal('gallery/WhatsApp Video 2025-05-22 at 08.36.14_c4fba06f.mp4', 'video')">
                             <video src="gallery/WhatsApp Video 2025-05-22 at 08.36.14_c4fba06f.mp4" muted></video>
-                            <div class="video-overlay">▶ VIDEO</div>
+                            <div class="video-overlay"><i data-lucide="play"></i>VIDEO</div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="past-gallery">
+                <h2>Galería · Edición 2025</h2>
+                <p class="subtitle">Revive los mejores momentos de la 8ª versión de Aguas Abiertas Chile</p>
+                <div class="gallery-grid">
+                    <a class="gallery-item" href="https://www.flickr.com/photos/203739681@N02/54883839055" target="_blank" rel="noopener">
+                        <img src="https://live.staticflickr.com/65535/54883839055_e3643b9d2f_z.jpg" loading="lazy" alt="Aguas Abiertas Chile 2025">
+                    </a>
+                    <a class="gallery-item" href="https://www.flickr.com/photos/203739681@N02/54883839085" target="_blank" rel="noopener">
+                        <img src="https://live.staticflickr.com/65535/54883839085_c335946ca2_z.jpg" loading="lazy" alt="Aguas Abiertas Chile 2025">
+                    </a>
+                    <a class="gallery-item" href="https://www.flickr.com/photos/203739681@N02/54882677357" target="_blank" rel="noopener">
+                        <img src="https://live.staticflickr.com/65535/54882677357_d436e60d82_z.jpg" loading="lazy" alt="Aguas Abiertas Chile 2025">
+                    </a>
+                    <a class="gallery-item" href="https://www.flickr.com/photos/203739681@N02/54883549121" target="_blank" rel="noopener">
+                        <img src="https://live.staticflickr.com/65535/54883549121_7092535a1b_z.jpg" loading="lazy" alt="Aguas Abiertas Chile 2025">
+                    </a>
+                    <a class="gallery-item" href="https://www.flickr.com/photos/203739681@N02/54883793439" target="_blank" rel="noopener">
+                        <img src="https://live.staticflickr.com/65535/54883793439_479ae5e8b3_z.jpg" loading="lazy" alt="Aguas Abiertas Chile 2025">
+                    </a>
+                </div>
+                <div class="gallery-cta">
+                    <a href="https://www.flickr.com/photos/203739681@N02/albums/72177720329946553/" target="_blank" rel="noopener"><i data-lucide="image"></i> Ver todas las fotos en Flickr</a>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="download-card">
+                    <div class="download-icon"><i data-lucide="file-text"></i></div>
+                    <div class="download-info">
+                        <h3>Resultados · Edición 2025</h3>
+                        <p>Descarga los resultados oficiales de la 8ª versión de Aguas Abiertas Chile.</p>
+                    </div>
+                    <a class="download-btn" href="resultados%20aach%202025.pdf" download><i data-lucide="download"></i> Descargar PDF</a>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h2>Programación del Evento</h2>
+                <p class="subtitle">Cronograma general de la jornada</p>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Evento</th>
+                            <th>Categoría</th>
+                            <th>Distancia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="schedule-time">07:30 - 08:20</td><td>Recepción de deportistas</td><td>—</td><td>—</td></tr>
+                        <tr><td class="schedule-time">08:20 - 09:10</td><td>Marcaje de deportistas</td><td>—</td><td>—</td></tr>
+                        <tr><td class="schedule-time">09:10 - 10:20</td><td>Últimas instrucciones</td><td>—</td><td>—</td></tr>
+                        <tr><td class="schedule-time">10:30</td><td>Largada diferida</td><td>Pre-Máster · Máster</td><td>2K</td></tr>
+                        <tr><td class="schedule-time">10:40</td><td>Largada diferida</td><td>Infantil · Juvenil · Pre-Máster · Máster</td><td>1K</td></tr>
+                        <tr><td class="schedule-time">10:50</td><td>Largada</td><td>Relevos Open</td><td>3x1K</td></tr>
+                        <tr><td class="schedule-time">13:00</td><td>Ceremonia de premiación</td><td>—</td><td>—</td></tr>
+                        <tr><td class="schedule-time">13:30</td><td>Cierre del evento</td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+                <p class="schedule-note">El cronograma está sujeto a modificaciones por condiciones climáticas o de seguridad. Cualquier cambio será comunicado por los canales oficiales del evento.</p>
+            </div>
+
             <div class="ticket-form">
-                <h2>Venta de Entradas Finalizada</h2>
-                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px; opacity: 0.95;">
-                    La venta de entradas para este evento ha finalizado. ¡Gracias por tu interés!
+                <h2>Inscríbete</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 24px; opacity: 0.95;">
+                    Completa el formulario para asegurar tu cupo en la 9ª edición de Aguas Abiertas Chile.
                 </p>
-                <form id="ticketForm" style="opacity: 0.5; pointer-events: none;">
+                <form id="ticketForm">
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="name">Nombre completo</label>
@@ -665,7 +993,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" placeholder="+56 9 8231 8236" required>
+                            <input type="tel" id="phone" placeholder="+56 9 1234 5678" required>
                         </div>
                         <div class="form-group">
                             <label for="gender">Género</label>
@@ -689,17 +1017,18 @@
                         </div>
                         <div class="form-group">
                             <label for="stage">Etapa</label>
-                            <select id="stage" required disabled>
+                            <select id="stage" required>
                                 <option value="">Selecciona una etapa</option>
-                                <option value="preventa" disabled>Preventa (Finalizada)</option>
-                                <option value="general" disabled>Venta General (Finalizada)</option>
+                                <option value="preventa">Preventa (hasta 6 sep)</option>
+                                <option value="general">Venta General (7 sep - 5 oct)</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="testType">Tipo de Prueba</label>
                             <select id="testType" required>
                                 <option value="individual">Individual</option>
-                                <option value="relevo">Relevo</option>
+                                <option value="relevo">Relevo (3x1K)</option>
+                                <option value="pack">Pack Individual + Relevo</option>
                             </select>
                         </div>
                         <div class="form-group full-width">
@@ -709,7 +1038,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" id="buyButton" disabled>🚫 Venta Finalizada</button>
+                    <button type="submit" id="buyButton"><i data-lucide="ticket"></i> Comprar Entrada</button>
                 </form>
             </div>
         </div>
@@ -726,7 +1055,11 @@
         </video>
     </div>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        // Render monochrome Lucide icons
+        if (window.lucide) lucide.createIcons();
+
         // Variables para la navegación de la galería
         let currentItemIndex = 0;
         let galleryItems = [];
@@ -773,6 +1106,7 @@
                 categoryInput.value = category.name;
                 // Filter distances based on test type
                 let availableDistances = category.distances;
+                // El relevo se nada en tramos de 1000 m; el pack incluye individual (1k o 2k).
                 if (testType === 'relevo') {
                     availableDistances = availableDistances.filter(dist => dist === '1000');
                 }
@@ -788,32 +1122,37 @@
             }
         }
 
-        // Precios según etapa y tipo de prueba
+        // Precios según etapa y tipo de prueba (Bases 2026)
         const prices = {
             preventa: {
-                individual: 25000,
-                relevo: 60000
+                individual: 35000,
+                relevo: 75000
             },
             general: {
-                individual: 35000,
+                individual: 45000,
                 relevo: 90000
             }
         };
+        // El pack (individual + relevo) tiene un valor único, independiente de la etapa.
+        const PACK_PRICE = 55000;
+
+        function getSelectedPrice(stage, testType) {
+            if (testType === 'pack') return PACK_PRICE;
+            if (stage && testType) return prices[stage][testType];
+            return null;
+        }
 
         function updateBuyButtonPrice() {
             const stage = document.getElementById('stage').value;
             const testType = document.getElementById('testType').value;
             const buyButton = document.getElementById('buyButton');
-            if (stage && testType) {
-                const price = prices[stage][testType];
-                let label = '🎯 Comprar Entrada';
-                if (price) {
-                    label += ` - $${price.toLocaleString('es-CL')}.`;
-                }
-                buyButton.textContent = label;
-            } else {
-                buyButton.textContent = '🎯 Comprar Entrada';
+            let label = 'Comprar Entrada';
+            const price = getSelectedPrice(stage, testType);
+            if (price) {
+                label += ` - $${price.toLocaleString('es-CL')}.`;
             }
+            buyButton.innerHTML = '<i data-lucide="ticket"></i> ' + label;
+            if (window.lucide) lucide.createIcons();
         }
 
         document.getElementById('stage').addEventListener('change', updateBuyButtonPrice);
@@ -824,10 +1163,11 @@
             e.preventDefault();
 
             const buyButton = document.getElementById('buyButton');
-            const originalButtonText = buyButton.textContent;
+            const originalButtonText = buyButton.innerHTML;
 
             // Show loading state
-            buyButton.textContent = '⏳ Procesando...';
+            buyButton.innerHTML = '<i data-lucide="loader-circle"></i> Procesando...';
+            if (window.lucide) lucide.createIcons();
             buyButton.disabled = true;
             buyButton.style.opacity = '0.7';
             buyButton.style.cursor = 'not-allowed';
@@ -848,7 +1188,7 @@
             if (formData.category === 'No elegible') {
                 alert('No hay categoría disponible para tu edad/género.');
                 // Reset button state
-                buyButton.textContent = originalButtonText;
+                buyButton.innerHTML = originalButtonText; if (window.lucide) lucide.createIcons();
                 buyButton.disabled = false;
                 buyButton.style.opacity = '1';
                 buyButton.style.cursor = 'pointer';
@@ -859,7 +1199,7 @@
             let result;
 
             try {
-                response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/purchase', {
+                response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/purchase', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -892,7 +1232,7 @@
             } finally {
                 // Reset button state if not redirecting
                 if (!response?.ok || !result?.init_point) {
-                    buyButton.textContent = originalButtonText;
+                    buyButton.innerHTML = originalButtonText; if (window.lucide) lucide.createIcons();
                     buyButton.disabled = false;
                     buyButton.style.opacity = '1';
                     buyButton.style.cursor = 'pointer';

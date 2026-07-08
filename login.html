@@ -13,19 +13,21 @@
         }
 
         :root {
-            --shopify-bg: #F6F6F7;
-            --shopify-sidebar: #1A1C23;
-            --shopify-text: #202223;
-            --shopify-text-secondary: #6D7175;
-            --shopify-green: #008060;
-            --shopify-blue: #006FBB;
-            --shopify-border: #E1E3E5;
+            /* ProductSentinel palette (primary = deep blue; green reserved for success) */
+            --shopify-bg: #F6F8FA;
+            --shopify-sidebar: #0B1B2B;
+            --shopify-text: #0B1B2B;
+            --shopify-text-secondary: #3A4A5A;
+            --shopify-green: #003F91;       /* primary brand accent */
+            --shopify-green-hover: #00306f;
+            --shopify-blue: #003F91;
+            --shopify-border: #E3E8EE;
             --shopify-white: #FFFFFF;
-            --shopify-hover: #F7F8FA;
-            --shopify-success: #008060;
-            --shopify-warning: #F1A817;
-            --shopify-error: #D72C0D;
-            --shopify-info: #006FBB;
+            --shopify-hover: #F6F8FA;
+            --shopify-success: #2E7D46;
+            --shopify-warning: #B7791F;
+            --shopify-error: #C0392B;
+            --shopify-info: #5DA9E9;
         }
 
         body {
@@ -114,7 +116,7 @@
         .form-input:focus {
             outline: none;
             border-color: var(--shopify-green);
-            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 63, 145, 0.12);
         }
 
         .form-input:hover {
@@ -140,8 +142,8 @@
         }
 
         .btn-primary:hover {
-            background: #006e52;
-            box-shadow: 0 2px 4px rgba(0, 128, 96, 0.2);
+            background: var(--shopify-green-hover);
+            box-shadow: 0 2px 4px rgba(0, 63, 145, 0.2);
         }
 
         .btn-primary:disabled {
@@ -241,6 +243,9 @@
             outline: 2px solid var(--shopify-green);
             outline-offset: 2px;
         }
+
+        .lucide { width: 20px; height: 20px; stroke-width: 2; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+        .btn-primary .lucide, .btn-secondary .lucide { width: 16px; height: 16px; }
     </style>
 </head>
 <body>
@@ -281,7 +286,7 @@
             
             <div class="form-actions">
                 <button type="submit" class="btn-primary" id="loginButton">
-                    <span id="loginIcon">🔐</span>
+                    <span id="loginIcon"><i data-lucide="lock"></i></span>
                     <span id="loginText">Sign in</span>
                 </button>
             </div>
@@ -291,12 +296,15 @@
         
         <div class="back-link">
             <a href="index.html" class="btn-secondary">
-                ← Back to main page
+                <i data-lucide="arrow-left"></i> Back to main page
             </a>
         </div>
     </div>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        if (window.lucide) lucide.createIcons();
+
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -321,7 +329,7 @@
             };
             
             try {
-                const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/login', {
+                const response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -366,7 +374,7 @@
                 errorMessage.style.display = 'block';
             } finally {
                 // Reset button state
-                loginIcon.textContent = '🔐';
+                loginIcon.innerHTML = '<i data-lucide="lock"></i>'; if (window.lucide) lucide.createIcons();
                 loginText.textContent = 'Sign in';
                 loginButton.disabled = false;
             }

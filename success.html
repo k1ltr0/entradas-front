@@ -6,6 +6,23 @@
     <title>¡Pago Exitoso! - Evento de Nado en Aguas Abiertas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --navy: #0B1B2B;
+            --blue: #003F91;
+            --blue-dark: #00306f;
+            --blue-light: #5DA9E9;
+            --slate: #3A4A5A;
+            --muted: #8A99A8;
+            --bg: #FFFFFF;
+            --bg-soft: #F6F8FA;
+            --border: #E3E8EE;
+            --green: #2E7D46;
+            --green-dark: #246337;
+            --green-bg: #E5F4E3;
+            --red: #C0392B;
+            --amber: #B7791F;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,8 +31,8 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--slate);
+            background: var(--bg);
             min-height: 100vh;
         }
         .container {
@@ -24,10 +41,11 @@
             padding: 0 20px;
         }
         .banner {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            padding: 60px 0;
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 0;
             text-align: center;
-            color: white;
+            color: var(--navy);
             position: relative;
             overflow: hidden;
         }
@@ -38,7 +56,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.5;
+            -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 70%);
+            mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 70%);
             pointer-events: none;
         }
         .banner-content {
@@ -46,47 +70,46 @@
             z-index: 2;
         }
         .banner img {
-            max-width: 120px;
+            max-width: 100px;
             margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(11, 27, 43, 0.08);
         }
         .banner h1 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: var(--navy);
         }
         .banner p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: 1.1rem;
+            color: var(--slate);
+            font-weight: 400;
         }
         .main-content {
-            background: white;
-            border-radius: 20px 20px 0 0;
-            margin-top: -20px;
+            background: var(--bg);
             position: relative;
             z-index: 3;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-            padding: 60px 0;
+            padding: 56px 0;
         }
         .success-container {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
         .success-icon {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #48bb78, #38a169);
+            width: 104px;
+            height: 104px;
+            background: var(--green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 3rem;
+            margin: 0 auto 28px;
+            font-size: 2.6rem;
             color: white;
-            box-shadow: 0 8px 32px rgba(72, 187, 120, 0.3);
+            box-shadow: 0 8px 26px rgba(46, 125, 70, 0.25);
             animation: pop 0.6s;
         }
         @keyframes pop {
@@ -95,40 +118,42 @@
             100% { transform: scale(1); }
         }
         .success-title {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #38a169;
+            letter-spacing: -0.02em;
+            color: var(--navy);
             margin-bottom: 20px;
         }
         .success-message {
-            font-size: 1.2rem;
-            color: #4a5568;
+            font-size: 1.15rem;
+            color: var(--slate);
             margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         .success-details {
-            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #81e6d9;
+            background: var(--green-bg);
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid #C6E6C0;
             margin-bottom: 40px;
             text-align: left;
         }
         .success-details h3 {
-            color: #2c7a7b;
-            font-size: 1.3rem;
-            font-weight: 600;
+            color: var(--navy);
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 20px;
         }
         .detail-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
         }
         .detail-item:last-child {
             margin-bottom: 0;
@@ -136,8 +161,8 @@
         .detail-icon {
             width: 32px;
             height: 32px;
-            background: #48bb78;
-            border-radius: 6px;
+            background: var(--green);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,65 +170,67 @@
             color: white;
             font-weight: 600;
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
         .detail-content h4 {
             font-weight: 600;
-            color: #2d3748;
+            color: var(--navy);
             margin-bottom: 2px;
         }
         .detail-content p {
-            color: #718096;
+            color: var(--muted);
             font-size: 0.9rem;
         }
         .action-buttons {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 40px;
         }
         .btn {
-            padding: 16px 32px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 15px 30px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             text-decoration: none;
             display: inline-block;
             min-width: 180px;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--blue);
             color: white;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 18px rgba(0, 63, 145, 0.25);
         }
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+            background: var(--blue-dark);
+            box-shadow: 0 10px 26px rgba(0, 63, 145, 0.32);
         }
         .btn-outline {
             background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
+            color: var(--blue);
+            border: 1px solid var(--blue);
         }
         .btn-outline:hover {
-            background: #667eea;
+            background: var(--blue);
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         .support-info {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-soft);
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
             margin-top: 40px;
         }
         .support-info h3 {
-            color: #2d3748;
-            font-size: 1.3rem;
-            font-weight: 600;
+            color: var(--navy);
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 20px;
         }
         .support-contact {
@@ -211,24 +238,25 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
         .support-contact:last-child {
             margin-bottom: 0;
         }
         .contact-icon {
-            width: 24px;
-            height: 24px;
-            background: #667eea;
-            border-radius: 4px;
+            width: 26px;
+            height: 26px;
+            background: #EAF1FB;
+            border: 1px solid #D3E2F6;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--blue);
             font-size: 0.8rem;
         }
         .contact-text {
-            color: #4a5568;
+            color: var(--slate);
             font-weight: 500;
         }
         @media (max-width: 768px) {
@@ -261,6 +289,19 @@
                 font-size: 1.1rem;
             }
         }
+        /* Icons (Lucide — monochrome, inherit currentColor) */
+        .lucide {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .success-icon .lucide { width: 48px; height: 48px; }
+        .detail-icon .lucide { width: 18px; height: 18px; }
+        .contact-icon .lucide { width: 15px; height: 15px; }
+        .btn .lucide { width: 18px; height: 18px; margin-right: 2px; }
     </style>
 </head>
 <body>
@@ -276,7 +317,7 @@
     <div class="main-content">
         <div class="container">
             <div class="success-container">
-                <div class="success-icon">✅</div>
+                <div class="success-icon"><i data-lucide="check"></i></div>
                 <h2 class="success-title">¡Tu inscripción está confirmada!</h2>
                 <p class="success-message">
                     Hemos recibido tu pago correctamente. Pronto recibirás un correo electrónico con los detalles de tu inscripción y tu comprobante.<br>
@@ -285,21 +326,21 @@
                 <div class="success-details">
                     <h3>¿Qué sucede ahora?</h3>
                     <div class="detail-item">
-                        <div class="detail-icon">📧</div>
+                        <div class="detail-icon"><i data-lucide="mail"></i></div>
                         <div class="detail-content">
                             <h4>Revisa tu correo</h4>
                             <p>Te hemos enviado un email con la confirmación y los detalles de tu inscripción.</p>
                         </div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-icon">📝</div>
+                        <div class="detail-icon"><i data-lucide="file-text"></i></div>
                         <div class="detail-content">
                             <h4>Verifica tus datos</h4>
                             <p>Si encuentras algún error, contáctanos lo antes posible para corregirlo.</p>
                         </div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-icon">🏊‍♂️</div>
+                        <div class="detail-icon"><i data-lucide="waves"></i></div>
                         <div class="detail-content">
                             <h4>¡Nos vemos en el evento!</h4>
                             <p>Recuerda llevar tu comprobante y documento de identidad el día del evento.</p>
@@ -307,28 +348,30 @@
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <a href="/" class="btn btn-primary">🏠 Volver al Inicio</a>
-                    <a href="mailto:ventas@aguasabiertaschile.cl" class="btn btn-outline">📧 Contactar Soporte</a>
+                    <a href="/" class="btn btn-primary"><i data-lucide="house"></i> Volver al Inicio</a>
+                    <a href="mailto:jcontreras@aguasabiertaschile.cl" class="btn btn-outline"><i data-lucide="mail"></i> Contactar Soporte</a>
                 </div>
                 <div class="support-info">
                     <h3>¿Necesitas ayuda?</h3>
                     <div class="support-contact">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-text">ventas@aguasabiertaschile.cl</div>
+                        <div class="contact-icon"><i data-lucide="mail"></i></div>
+                        <div class="contact-text">jcontreras@aguasabiertaschile.cl</div>
                     </div>
                     <div class="support-contact">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-text">+56 9 8231 8236</div>
+                        <div class="contact-icon"><i data-lucide="smartphone"></i></div>
+                        <div class="contact-text">+56 9 6149 0554</div>
                     </div>
                     <div class="support-contact">
-                        <div class="contact-icon">💬</div>
-                        <div class="contact-text">WhatsApp: +56 9 8231 8236</div>
+                        <div class="contact-icon"><i data-lucide="message-circle"></i></div>
+                        <div class="contact-text">WhatsApp: +56 9 6149 0554</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        if (window.lucide) lucide.createIcons();
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const ticketId = urlParams.get('ticket_id');
