@@ -91,7 +91,7 @@ const Dashboard: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://entradas-back-66181581846.europe-west1.run.app/api/tickets', {
+      const response = await fetch('https://entradas-back-220847228031.us-central1.run.app/api/tickets', {
         method: 'GET',
         headers: {
           'Authorization': `${tokenType} ${token}`,
