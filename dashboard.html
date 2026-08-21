@@ -816,6 +816,9 @@
                             <button class="btn btn-secondary" onclick="exportData()">
                                 <i data-lucide="download"></i> Export
                             </button>
+                            <button class="btn btn-secondary" id="sembradoBtn" onclick="generarSembrado()" title="Experimental: arma el sembrado por distancia, categoría y género">
+                                <i data-lucide="flask-conical"></i> Sembrado (beta)
+                            </button>
                             <button class="btn btn-primary" onclick="loadTickets()">
                                 <i data-lucide="refresh-cw"></i> Refresh
                             </button>
@@ -866,6 +869,22 @@
                             <p>Loading tickets...</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Sembrado (experimental) -->
+                <div class="data-card" id="sembradoCard" style="display: none; margin-top: 24px;">
+                    <div class="data-card-header">
+                        <h2 class="data-card-title">Sembrado <span class="badge badge-warning">beta</span></h2>
+                        <div class="data-card-actions">
+                            <button class="btn btn-secondary" onclick="exportSembrado()">
+                                <i data-lucide="download"></i> Exportar sembrado
+                            </button>
+                            <button class="btn btn-secondary" onclick="cerrarSembrado()">
+                                <i data-lucide="x"></i> Cerrar
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sembradoContent"></div>
                 </div>
             </main>
         </div>
@@ -1212,7 +1231,12 @@
                     'Email': ticket.email || 'N/A',
                     'Phone': ticket.phone || 'N/A',
                     'DNI': ticket.dni || 'N/A',
+                    'Fecha de Nacimiento': ticket.birth_date || 'N/A',
+                    'Edad (al 17-10-2026)': (ticket.age !== null && ticket.age !== undefined) ? ticket.age : 'N/A',
+                    'Club': ticket.club || 'N/A',
+                    'Género': ticket.gender || 'N/A',
                     'Category': ticket.category || 'N/A',
+                    'Prueba': ticket.test_type || 'N/A',
                     'Distance': ticket.distance ? `${ticket.distance}m` : 'N/A',
                     'Price': `$${(ticket.price || 0).toFixed(2)}`,
                     'Purchase Date': formatDate(ticket.purchase_date),
@@ -1274,6 +1298,294 @@
                 console.error('Error details:', error.message, error.stack);
                 alert(`Failed to export tickets: ${error.message}`);
             }
+        }
+
+        // ==========================================================
+        // SEMBRADO (experimental)
+        // Arma la partida por distancia -> categoría -> género y asigna
+        // números correlativos. Base: Bases AACH 2026 (edades cumplidas
+        // al 17-10-2026, largadas 2K 10:30 / 1K 10:40 / Relevos 10:50).
+        // ==========================================================
+        const SEMBRADO_EVENT_DATE = new Date('2026-10-17T00:00:00');
+
+        const SEMBRADO_CATEGORIES = [
+            { name: 'Infantil B',  min: 12, max: 13,  cap: 'Naranjo' },
+            { name: 'Juvenil A',   min: 14, max: 15,  cap: 'Naranjo' },
+            { name: 'Juvenil B',   min: 16, max: 18,  cap: 'Naranjo' },
+            { name: 'Pre-Máster',  min: 19, max: 24,  cap: 'Verde' },
+            { name: 'Máster A',    min: 25, max: 29,  cap: 'Verde' },
+            { name: 'Máster B',    min: 30, max: 34,  cap: 'Verde' },
+            { name: 'Máster C',    min: 35, max: 39,  cap: 'Verde' },
+            { name: 'Máster D',    min: 40, max: 44,  cap: 'Verde' },
+            { name: 'Máster E',    min: 45, max: 49,  cap: 'Verde' },
+            { name: 'Máster F',    min: 50, max: 54,  cap: 'Verde' },
+            { name: 'Máster G',    min: 55, max: 59,  cap: 'Verde' },
+            { name: 'Máster H',    min: 60, max: 64,  cap: 'Verde' },
+            { name: 'Máster I',    min: 65, max: 69,  cap: 'Verde' },
+            { name: 'Máster J',    min: 70, max: 120, cap: 'Verde' },
+        ];
+        const RELAY_CAP = 'Rosado';
+
+        let sembradoData = null; // { filas: [], equipos: [], avisos: [] }
+
+        function sembradoEdad(ticket) {
+            if (ticket.birth_date) {
+                const b = new Date(String(ticket.birth_date).slice(0, 10) + 'T00:00:00');
+                if (!isNaN(b)) {
+                    let age = SEMBRADO_EVENT_DATE.getFullYear() - b.getFullYear();
+                    const m = SEMBRADO_EVENT_DATE.getMonth() - b.getMonth();
+                    if (m < 0 || (m === 0 && SEMBRADO_EVENT_DATE.getDate() < b.getDate())) age--;
+                    return age;
+                }
+            }
+            if (ticket.age !== null && ticket.age !== undefined && ticket.age !== '') return Number(ticket.age);
+            return null;
+        }
+
+        function categoriaPorEdad(edad) {
+            if (edad === null || isNaN(edad)) return null;
+            const cat = SEMBRADO_CATEGORIES.find(c => edad >= c.min && edad <= c.max);
+            return cat ? cat.name : null;
+        }
+
+        function sembradoCategoria(ticket) {
+            // La categoría guardada manda; si falta, se recalcula desde la edad.
+            if (ticket.category && SEMBRADO_CATEGORIES.some(c => c.name === ticket.category)) return ticket.category;
+            return categoriaPorEdad(sembradoEdad(ticket));
+        }
+
+        function sembradoGorra(categoria) {
+            const cat = SEMBRADO_CATEGORIES.find(c => c.name === categoria);
+            return cat ? cat.cap : '—';
+        }
+
+        function esPagado(ticket) {
+            return ticket.payment_status === 'approved' || ticket.status === 'paid';
+        }
+
+        function generarSembrado() {
+            // Se siembra sobre lo que está filtrado en pantalla, solo pagados.
+            const base = (filteredTickets && filteredTickets.length ? filteredTickets : allTickets) || [];
+            const pagados = base.filter(esPagado);
+            const descartadosNoPagados = base.length - pagados.length;
+
+            const avisos = [];
+            if (descartadosNoPagados > 0) {
+                avisos.push(`${descartadosNoPagados} inscripción(es) sin pago aprobado quedaron fuera del sembrado.`);
+            }
+
+            // --- Individuales (individual + pack) ---
+            const individuales = pagados.filter(t => (t.test_type || 'individual') !== 'relevo');
+            const filas = individuales.map(t => {
+                const categoria = sembradoCategoria(t);
+                const categoriaCalculada = categoriaPorEdad(sembradoEdad(t));
+                if (!categoria) avisos.push(`Sin categoría (falta fecha de nacimiento): ${t.name || t.id}`);
+                if (categoria && categoriaCalculada && categoria !== categoriaCalculada) {
+                    avisos.push(`${t.name || t.id}: categoría inscrita "${categoria}" no coincide con la edad al 17-10-2026 ("${categoriaCalculada}").`);
+                }
+                if (!t.distance) avisos.push(`Sin distancia asignada: ${t.name || t.id}`);
+                return {
+                    ticket_id: t.id || '',
+                    nombre: (t.name || '').trim(),
+                    club: (t.club || 'Independiente').trim(),
+                    email: t.email || '',
+                    genero: t.gender || '',
+                    fecha_nacimiento: t.birth_date || '',
+                    edad: sembradoEdad(t),
+                    categoria: categoria || 'Sin categoría',
+                    distancia: t.distance ? String(t.distance) : 'Sin distancia',
+                    prueba: t.test_type || 'individual',
+                    gorra: categoria ? sembradoGorra(categoria) : '—'
+                };
+            });
+
+            const ordenDistancia = d => (d === '2000' ? 0 : d === '1000' ? 1 : 2);
+            const ordenCategoria = c => {
+                const i = SEMBRADO_CATEGORIES.findIndex(x => x.name === c);
+                return i === -1 ? 999 : i;
+            };
+            const ordenGenero = g => (g === 'femenino' ? 0 : g === 'masculino' ? 1 : 2);
+
+            filas.sort((a, b) =>
+                ordenDistancia(a.distancia) - ordenDistancia(b.distancia) ||
+                ordenCategoria(a.categoria) - ordenCategoria(b.categoria) ||
+                ordenGenero(a.genero) - ordenGenero(b.genero) ||
+                a.nombre.localeCompare(b.nombre, 'es')
+            );
+            filas.forEach((f, i) => { f.numero = i + 1; });
+
+            // --- Relevos: se agrupan por club / nombre de equipo ---
+            const relevos = pagados.filter(t => t.test_type === 'relevo' || t.test_type === 'pack');
+            const equiposMap = {};
+            relevos.forEach(t => {
+                const equipo = (t.club || 'Sin equipo').trim();
+                const key = equipo.toLowerCase();
+                if (!equiposMap[key]) equiposMap[key] = { equipo, integrantes: [] };
+                equiposMap[key].integrantes.push({
+                    nombre: (t.name || '').trim(),
+                    genero: t.gender || '',
+                    fecha_nacimiento: t.birth_date || '',
+                    edad: sembradoEdad(t),
+                    club: (t.club || '').trim(),
+                    prueba: t.test_type
+                });
+            });
+            const equipos = Object.values(equiposMap).sort((a, b) => a.equipo.localeCompare(b.equipo, 'es'));
+            equipos.forEach((e, i) => {
+                e.numero = i + 1;
+                e.gorra = RELAY_CAP;
+                const generos = new Set(e.integrantes.map(x => x.genero));
+                e.observacion = [];
+                if (e.integrantes.length !== 3) e.observacion.push(`${e.integrantes.length}/3 integrantes`);
+                if (generos.size < 2) e.observacion.push('falta 1 nadador/a de sexo opuesto (relevo mixto obligatorio)');
+                e.observacion = e.observacion.join(' · ') || 'OK';
+            });
+
+            sembradoData = { filas, equipos, avisos };
+            renderSembrado();
+        }
+
+        function renderSembrado() {
+            const card = document.getElementById('sembradoCard');
+            const content = document.getElementById('sembradoContent');
+            card.style.display = 'block';
+
+            if (!sembradoData || (sembradoData.filas.length === 0 && sembradoData.equipos.length === 0)) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i data-lucide="flask-conical"></i></div>
+                        <h3 class="empty-title">No hay inscripciones pagadas para sembrar</h3>
+                        <p class="empty-description">Ajusta los filtros o revisa el estado de pago de los tickets.</p>
+                    </div>`;
+                if (window.lucide) lucide.createIcons();
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
+            let html = '';
+
+            if (sembradoData.avisos.length) {
+                const avisosUnicos = [...new Set(sembradoData.avisos)];
+                html += `<div style="padding: 12px 16px; margin-bottom: 16px; border-left: 3px solid #d97706; background: #fff7ed; border-radius: 6px; font-size: 0.85rem;">
+                    <strong>Revisar (${avisosUnicos.length}):</strong>
+                    <ul style="margin: 8px 0 0 18px;">${avisosUnicos.slice(0, 15).map(a => `<li>${a}</li>`).join('')}</ul>
+                    ${avisosUnicos.length > 15 ? `<p style="margin-top:6px;">…y ${avisosUnicos.length - 15} más.</p>` : ''}
+                </div>`;
+            }
+
+            // Agrupado: distancia -> categoría -> género
+            const grupos = {};
+            sembradoData.filas.forEach(f => {
+                const key = `${f.distancia}|${f.categoria}|${f.genero}`;
+                (grupos[key] = grupos[key] || []).push(f);
+            });
+
+            html += `<p style="font-size: 0.85rem; color: var(--shopify-text-subdued, #6b7280); margin-bottom: 16px;">
+                ${sembradoData.filas.length} nadador(es) individuales · ${sembradoData.equipos.length} equipo(s) de relevo ·
+                orden: 2K (10:30) → 1K (10:40) → Relevos (10:50). Numeración correlativa según ese orden.
+            </p>`;
+
+            Object.keys(grupos).forEach(key => {
+                const [distancia, categoria, genero] = key.split('|');
+                const filas = grupos[key];
+                html += `
+                <h3 style="margin: 20px 0 8px; font-size: 0.95rem;">
+                    ${distancia === 'Sin distancia' ? 'Sin distancia' : distancia + 'm'} · ${categoria} · ${genero || 'sin género'}
+                    <span class="badge badge-neutral">${filas.length}</span>
+                    <span class="badge badge-neutral">Gorra ${filas[0].gorra}</span>
+                </h3>
+                <table class="data-table">
+                    <thead><tr><th>N°</th><th>Nadador</th><th>Club</th><th>Fecha nac.</th><th>Edad</th><th>Prueba</th></tr></thead>
+                    <tbody>
+                        ${filas.map(f => `<tr>
+                            <td><strong>${f.numero}</strong></td>
+                            <td>${f.nombre}</td>
+                            <td>${f.club}</td>
+                            <td>${f.fecha_nacimiento || '—'}</td>
+                            <td>${f.edad ?? '—'}</td>
+                            <td>${f.prueba}</td>
+                        </tr>`).join('')}
+                    </tbody>
+                </table>`;
+            });
+
+            if (sembradoData.equipos.length) {
+                html += `<h3 style="margin: 24px 0 8px; font-size: 0.95rem;">Relevo Open 3x1K · Gorra ${RELAY_CAP}</h3>
+                <table class="data-table">
+                    <thead><tr><th>N°</th><th>Equipo (club)</th><th>Integrantes</th><th>Estado</th></tr></thead>
+                    <tbody>
+                        ${sembradoData.equipos.map(e => `<tr>
+                            <td><strong>${e.numero}</strong></td>
+                            <td>${e.equipo}</td>
+                            <td>${e.integrantes.map(i => `${i.nombre} (${i.genero || '—'})`).join('<br>')}</td>
+                            <td>${e.observacion === 'OK' ? '<span class="badge badge-success">OK</span>' : `<span class="badge badge-warning">${e.observacion}</span>`}</td>
+                        </tr>`).join('')}
+                    </tbody>
+                </table>`;
+            }
+
+            content.innerHTML = html;
+            if (window.lucide) lucide.createIcons();
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function cerrarSembrado() {
+            document.getElementById('sembradoCard').style.display = 'none';
+        }
+
+        function exportSembrado() {
+            if (typeof XLSX === 'undefined') {
+                alert('La librería de Excel no está cargada. Recarga la página e intenta de nuevo.');
+                return;
+            }
+            if (!sembradoData || (!sembradoData.filas.length && !sembradoData.equipos.length)) {
+                alert('Primero genera el sembrado.');
+                return;
+            }
+
+            const wb = XLSX.utils.book_new();
+
+            const hojaIndividual = sembradoData.filas.map(f => ({
+                'N°': f.numero,
+                'Distancia': f.distancia === 'Sin distancia' ? f.distancia : `${f.distancia}m`,
+                'Categoría': f.categoria,
+                'Género': f.genero,
+                'Nadador': f.nombre,
+                'Club': f.club,
+                'Fecha de Nacimiento': f.fecha_nacimiento || '',
+                'Edad (al 17-10-2026)': f.edad ?? '',
+                'Prueba': f.prueba,
+                'Gorra': f.gorra,
+                'Email': f.email,
+                'Ticket ID': f.ticket_id
+            }));
+            if (hojaIndividual.length) {
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(hojaIndividual), 'Sembrado individual');
+            }
+
+            const hojaRelevos = [];
+            sembradoData.equipos.forEach(e => {
+                e.integrantes.forEach((i, idx) => {
+                    hojaRelevos.push({
+                        'N° Equipo': e.numero,
+                        'Equipo (club)': e.equipo,
+                        'Posta': idx + 1,
+                        'Nadador': i.nombre,
+                        'Género': i.genero,
+                        'Fecha de Nacimiento': i.fecha_nacimiento || '',
+                        'Edad (al 17-10-2026)': i.edad ?? '',
+                        'Gorra': RELAY_CAP,
+                        'Estado equipo': e.observacion
+                    });
+                });
+            });
+            if (hojaRelevos.length) {
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(hojaRelevos), 'Sembrado relevos');
+            }
+
+            const now = new Date();
+            const stamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+            XLSX.writeFile(wb, `sembrado_${stamp}.xlsx`);
         }
 
         function showSection(section) {
